@@ -16,6 +16,7 @@
 		3A91E8732BCF64E700B015F0 /* PokedexDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8722BCF64E700B015F0 /* PokedexDemoTests.swift */; };
 		3A91E87D2BCF64E700B015F0 /* PokedexDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E87C2BCF64E700B015F0 /* PokedexDemoUITests.swift */; };
 		3A91E87F2BCF64E700B015F0 /* PokedexDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E87E2BCF64E700B015F0 /* PokedexDemoUITestsLaunchTests.swift */; };
+		3A91E88D2BCF705D00B015F0 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E88C2BCF705D00B015F0 /* RequestType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		3A91E8782BCF64E700B015F0 /* PokedexDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokedexDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A91E87C2BCF64E700B015F0 /* PokedexDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexDemoUITests.swift; sourceTree = "<group>"; };
 		3A91E87E2BCF64E700B015F0 /* PokedexDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3A91E88C2BCF705D00B015F0 /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				3A91E85B2BCF64E600B015F0 /* AppDelegate.swift */,
 				3A91E85D2BCF64E600B015F0 /* SceneDelegate.swift */,
 				3A91E85F2BCF64E600B015F0 /* ViewController.swift */,
+				3A91E88B2BCF703300B015F0 /* NetworkModule */,
 				3A91E8612BCF64E600B015F0 /* Main.storyboard */,
 				3A91E8642BCF64E700B015F0 /* Assets.xcassets */,
 				3A91E8662BCF64E700B015F0 /* LaunchScreen.storyboard */,
@@ -125,6 +128,14 @@
 				3A91E87E2BCF64E700B015F0 /* PokedexDemoUITestsLaunchTests.swift */,
 			);
 			path = PokedexDemoUITests;
+			sourceTree = "<group>";
+		};
+		3A91E88B2BCF703300B015F0 /* NetworkModule */ = {
+			isa = PBXGroup;
+			children = (
+				3A91E88C2BCF705D00B015F0 /* RequestType.swift */,
+			);
+			path = NetworkModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +272,7 @@
 				3A91E8602BCF64E600B015F0 /* ViewController.swift in Sources */,
 				3A91E85C2BCF64E600B015F0 /* AppDelegate.swift in Sources */,
 				3A91E85E2BCF64E600B015F0 /* SceneDelegate.swift in Sources */,
+				3A91E88D2BCF705D00B015F0 /* RequestType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
