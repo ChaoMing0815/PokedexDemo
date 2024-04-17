@@ -17,6 +17,6 @@ class AllPokemonListHTTPClient: HTTPClient {
 extension AllPokemonListHTTPClient {
     // https://pokeapi.co/api/v2/pokemon?limit=1302
     var allPokemonListRequestType: RequestType {
-        return RequestType.init(httpMethod: .GET, domainURL: .init(string: "https://pokeapi.co/api/v2")!, path: "pokemon", queryItems: [.init(name: "limit", value: "1302")])
+        return RequestType.init(httpMethod: .GET, domainURL: .init(string: "https://pokeapi.co/api/v2")!, path: "/pokemon", queryItems: [.init(name: "limit", value: "1302")])
     }
 }
