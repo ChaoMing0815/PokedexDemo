@@ -7,25 +7,29 @@
 
 import Foundation
 
+enum HTTPClientError: Error {
+    case NetworkError
+    case ResponseAndDataNilError
+}
+
 class HTTPClient {
-    
     let urlSession = URLSession.shared
     
-    
-    func request(with requestType: RequestType, completion: @escaping (Data) -> Void) {
+    func request(with requestType: RequestType, completion: @escaping (Data?, HTTPURLResponse?, HTTPClientError?) -> Void) {
         urlSession.dataTask(with: requestType.getURLRequest()) { [weak self] data, response, error in
             guard let self = self else { return }
             if let error = error {
-                print(error)
+                completion(nil, nil, .NetworkError)
                 return
             }
-            if let reponse = response as? HTTPURLResponse {
-                print(reponse.statusCode)
+            guard
+                let reponse = response as? HTTPURLResponse,
+                let data = data
+            else {
+                completion(nil, nil, .ResponseAndDataNilError)
+                return
             }
-            guard let data = data else { return }
-            DispatchQueue.main.async {
-                completion(data)
-            }
+            completion(data, reponse, nil)
         }.resume()
     }
 }
