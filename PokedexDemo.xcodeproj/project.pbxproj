@@ -24,6 +24,7 @@
 		3A91E89F2BCFA11300B015F0 /* PokemonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E89E2BCFA11300B015F0 /* PokemonDTO.swift */; };
 		3A91E8A12BCFA16E00B015F0 /* AllPokemonListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8A02BCFA16E00B015F0 /* AllPokemonListDTO.swift */; };
 		3A91E8A32BCFA3AC00B015F0 /* AllPokemonListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8A22BCFA3AC00B015F0 /* AllPokemonListService.swift */; };
+		3A91E8A52BCFAAF100B015F0 /* AllPokemonList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8A42BCFAAF100B015F0 /* AllPokemonList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		3A91E89E2BCFA11300B015F0 /* PokemonDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDTO.swift; sourceTree = "<group>"; };
 		3A91E8A02BCFA16E00B015F0 /* AllPokemonListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonListDTO.swift; sourceTree = "<group>"; };
 		3A91E8A22BCFA3AC00B015F0 /* AllPokemonListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonListService.swift; sourceTree = "<group>"; };
+		3A91E8A42BCFAAF100B015F0 /* AllPokemonList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				3A91E8A02BCFA16E00B015F0 /* AllPokemonListDTO.swift */,
+				3A91E8A42BCFAAF100B015F0 /* AllPokemonList.swift */,
 			);
 			path = ModelLayer;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				3A91E85E2BCF64E600B015F0 /* SceneDelegate.swift in Sources */,
 				3A91E88D2BCF705D00B015F0 /* RequestType.swift in Sources */,
 				3A91E8912BCF71B900B015F0 /* UIView+SnapKit.swift in Sources */,
+				3A91E8A52BCFAAF100B015F0 /* AllPokemonList.swift in Sources */,
 				3A91E8A12BCFA16E00B015F0 /* AllPokemonListDTO.swift in Sources */,
 				3A91E8962BCF779000B015F0 /* HTTPClient.swift in Sources */,
 				3A91E8A32BCFA3AC00B015F0 /* AllPokemonListService.swift in Sources */,
