@@ -25,6 +25,7 @@
 		3A91E8A12BCFA16E00B015F0 /* AllPokemonListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8A02BCFA16E00B015F0 /* AllPokemonListDTO.swift */; };
 		3A91E8A32BCFA3AC00B015F0 /* AllPokemonListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8A22BCFA3AC00B015F0 /* AllPokemonListService.swift */; };
 		3A91E8A52BCFAAF100B015F0 /* AllPokemonList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8A42BCFAAF100B015F0 /* AllPokemonList.swift */; };
+		3A91E8A72BCFB06100B015F0 /* AllPokemonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8A62BCFB06100B015F0 /* AllPokemonListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		3A91E8A02BCFA16E00B015F0 /* AllPokemonListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonListDTO.swift; sourceTree = "<group>"; };
 		3A91E8A22BCFA3AC00B015F0 /* AllPokemonListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonListService.swift; sourceTree = "<group>"; };
 		3A91E8A42BCFAAF100B015F0 /* AllPokemonList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonList.swift; sourceTree = "<group>"; };
+		3A91E8A62BCFB06100B015F0 /* AllPokemonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 		3A91E89C2BCFA0DF00B015F0 /* ViewModelLayer */ = {
 			isa = PBXGroup;
 			children = (
+				3A91E8A62BCFB06100B015F0 /* AllPokemonListViewModel.swift */,
 			);
 			path = ViewModelLayer;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 			files = (
 				3A91E8992BCF78D700B015F0 /* AllPokemonListHTTPClient.swift in Sources */,
 				3A91E8602BCF64E600B015F0 /* ViewController.swift in Sources */,
+				3A91E8A72BCFB06100B015F0 /* AllPokemonListViewModel.swift in Sources */,
 				3A91E85C2BCF64E600B015F0 /* AppDelegate.swift in Sources */,
 				3A91E89F2BCFA11300B015F0 /* PokemonDTO.swift in Sources */,
 				3A91E85E2BCF64E600B015F0 /* SceneDelegate.swift in Sources */,
