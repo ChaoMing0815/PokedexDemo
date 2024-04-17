@@ -15,21 +15,20 @@ enum HTTPClientError: Error {
 class HTTPClient {
     let urlSession = URLSession.shared
     
-    func request(with requestType: RequestType, completion: @escaping (Data?, HTTPURLResponse?, HTTPClientError?) -> Void) {
-        urlSession.dataTask(with: requestType.getURLRequest()) { [weak self] data, response, error in
-            guard let self = self else { return }
-            if let error = error {
-                completion(nil, nil, .NetworkError)
+    func request(with requestType: RequestType, completion: @escaping (Result<(Data, HTTPURLResponse), HTTPClientError>) -> Void) {
+        urlSession.dataTask(with: requestType.getURLRequest()) { data, response, error in
+            if let _ = error {
+                completion(Result.failure(.NetworkError))
                 return
             }
             guard
                 let reponse = response as? HTTPURLResponse,
                 let data = data
             else {
-                completion(nil, nil, .ResponseAndDataNilError)
+                completion(Result.failure(.ResponseAndDataNilError))
                 return
             }
-            completion(data, reponse, nil)
+            completion(Result.success((data, reponse)))
         }.resume()
     }
 }
