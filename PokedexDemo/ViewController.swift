@@ -29,6 +29,5 @@ extension ViewController: AllPokemonListViewModelDelegate {
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListErrorDidUpdate error: AllPokemonListServiceError) {
         print(error)
     }
-    
-    
 }
+
