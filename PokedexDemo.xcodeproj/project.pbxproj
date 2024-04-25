@@ -29,6 +29,7 @@
 		3A91E8B12BD8E21C00B015F0 /* PokemonInfoHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8B02BD8E21C00B015F0 /* PokemonInfoHTTPClient.swift */; };
 		3A91E8B32BD946A100B015F0 /* AllPokemonListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8B22BD946A100B015F0 /* AllPokemonListCellModel.swift */; };
 		3A91E8B72BD9EDD100B015F0 /* PokemonInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8B62BD9EDD100B015F0 /* PokemonInfo.swift */; };
+		3A91E8B92BD9EEBC00B015F0 /* PokemonInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8B82BD9EEBC00B015F0 /* PokemonInfoService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		3A91E8B02BD8E21C00B015F0 /* PokemonInfoHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoHTTPClient.swift; sourceTree = "<group>"; };
 		3A91E8B22BD946A100B015F0 /* AllPokemonListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonListCellModel.swift; sourceTree = "<group>"; };
 		3A91E8B62BD9EDD100B015F0 /* PokemonInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfo.swift; sourceTree = "<group>"; };
+		3A91E8B82BD9EEBC00B015F0 /* PokemonInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +258,7 @@
 		3A91E8B42BD9EB6200B015F0 /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
+				3A91E8B82BD9EEBC00B015F0 /* PokemonInfoService.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				3A91E8B72BD9EDD100B015F0 /* PokemonInfo.swift in Sources */,
 				3A91E8602BCF64E600B015F0 /* ViewController.swift in Sources */,
 				3A91E8A72BCFB06100B015F0 /* AllPokemonListViewModel.swift in Sources */,
+				3A91E8B92BD9EEBC00B015F0 /* PokemonInfoService.swift in Sources */,
 				3A91E85C2BCF64E600B015F0 /* AppDelegate.swift in Sources */,
 				3A91E89F2BCFA11300B015F0 /* PokemonInfoDTO.swift in Sources */,
 				3A91E8AA2BD154C400B015F0 /* AllPokemonListViewController.swift in Sources */,
