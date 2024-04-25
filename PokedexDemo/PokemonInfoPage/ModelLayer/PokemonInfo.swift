@@ -14,7 +14,7 @@ struct PokemonInfo {
     let weight: Int
     var imageData: Data?
     
-    init(with dto: PokemonInfoDTO) {
+    init(from dto: PokemonInfoDTO) {
         id = dto.id
         name = dto.name
         height = dto.height

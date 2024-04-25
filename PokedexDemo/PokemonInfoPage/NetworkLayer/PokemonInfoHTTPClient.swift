@@ -19,7 +19,7 @@ class PokemonInfoHTTPClient: HTTPClient {
     }
 }
 
-extension PokemonInfoHTTPClient {
+fileprivate extension PokemonInfoHTTPClient {
     // https://pokeapi.co/api/v2/pokemon/{name}
     func makePokemonInfoRequest(with name: String) -> RequestType {
         let url = URL.init(string: "https://pokeapi.co/api/v2")!
