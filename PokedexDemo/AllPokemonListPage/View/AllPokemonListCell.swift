@@ -12,18 +12,23 @@ class AllPokemonListCell: UITableViewCell {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        contentView.addSubview(nameLabel)
-        nameLabel.constraint(top: contentView.snp.top, bottom: contentView.snp.bottom, left: contentView.snp.left)
+        setupLayout()
     }
 }
 
 extension AllPokemonListCell {
-    func makeNameLabel() -> UILabel {
+    fileprivate func setupLayout() {
+        contentView.addSubview(nameLabel)
+        nameLabel.constraint(top: contentView.snp.top, bottom: contentView.snp.bottom, left: contentView.snp.left)
+    }
+    fileprivate func makeNameLabel() -> UILabel {
         let nameLabel = UILabel()
         return nameLabel
     }
-    
-    func setupData(with cellModel: AllPokemonListViewModel, indexPath: IndexPath) {
-        nameLabel.text = cellModel.allPokemonNames[indexPath.row]
+}
+
+extension AllPokemonListCell {
+    func configureCell(with cellModel: AllPokemonListCellModel) {
+        nameLabel.text = cellModel.name
     }
 }

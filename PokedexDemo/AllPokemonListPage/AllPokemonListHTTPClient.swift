@@ -13,7 +13,6 @@ class AllPokemonListHTTPClient: HTTPClient {
     }
 }
 
-// https://raw.githubusercontent.com/pokemon/{name}
 extension AllPokemonListHTTPClient {
     // https://pokeapi.co/api/v2/pokemon?limit=1302
     var allPokemonListRequestType: RequestType {
