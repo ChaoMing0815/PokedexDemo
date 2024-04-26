@@ -17,6 +17,8 @@ class AllPokemonListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Pokeomn List"
+        
         view.addSubview(pokemonListTableView)
         pokemonListTableView.constraint(top: view.snp.top, bottom: view.snp.bottom, left: view.snp.left, right: view.snp.right)
         
@@ -78,5 +80,19 @@ extension AllPokemonListViewController: UITableViewDataSource {
 }
 
 extension AllPokemonListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.setupPokemonNameForInfoPage(with: indexPath)
+        let pokemonInfoPageViewController = PokemonInfoPageViewController()
+        pokemonInfoPageViewController.dataSource = self
+        navigationController?.pushViewController(pokemonInfoPageViewController, animated: true)
+    }
+}
+
+extension AllPokemonListViewController: PokemonInfoPageViewControllerDataSource {
+    var pokemonName: String {
+        guard let name = viewModel.pokemonNameForInfoPage else {
+            fatalError("PokemonNameForInfoPage should not be nil!")
+        }
+        return name
+    }
 }
