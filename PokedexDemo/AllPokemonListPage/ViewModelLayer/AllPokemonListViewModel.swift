@@ -18,6 +18,7 @@ class AllPokemonListViewModel {
     
     let service = AllPokemonListService()
     var allPokemonNames = [String]()
+    var pokemonNameForInfoPage: String?
     
     func loadAllPokemonList() {
         service.loadAllPokemonList { [weak self] result in
@@ -35,5 +36,10 @@ class AllPokemonListViewModel {
     func makeCellModel(with indexPath: IndexPath) -> AllPokemonListCellModel {
         let name = allPokemonNames[indexPath.row]
         return .init(name: name)
+    }
+    
+    func setupPokemonNameForInfoPage(with indexPath: IndexPath) {
+        let name = allPokemonNames[indexPath.row]
+        pokemonNameForInfoPage = name
     }
 }
