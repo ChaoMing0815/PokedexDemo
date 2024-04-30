@@ -14,7 +14,8 @@ enum AllPokemonListServiceError: Error {
 class AllPokemonListService {
     let client = AllPokemonListHTTPClient()
     func loadAllPokemonList(completion: @escaping (Result<AllPokemonList, AllPokemonListServiceError>) -> Void) {
-        client.requestAllPokemonList { result in
+        client.requestAllPokemonList { [weak self] result in
+            guard let self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case let .success((data, _)): // tuple (Data, HTTPURLResponse) -> type
@@ -23,6 +24,7 @@ class AllPokemonListService {
                         let allPokemonListDTO = try JSONDecoder().decode(AllPokemonListDTO.self, from: data)
                         let allPokemonList = AllPokemonList(from: allPokemonListDTO)
                         completion(.success(allPokemonList))
+                        self.client.updateOffset()
                     } catch {
                         completion(.failure(.JSONParsingError))
                     }
