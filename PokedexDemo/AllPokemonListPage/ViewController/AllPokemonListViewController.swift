@@ -49,12 +49,12 @@ extension AllPokemonListViewController {
 
 extension AllPokemonListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.allPokemonNames.count
+        return viewModel.allPokemonListCellModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AllPokemonListCell.self), for: indexPath) as! AllPokemonListCell
-        let cellModel = viewModel.makeCellModel(with: indexPath)
+        let cellModel = viewModel.allPokemonListCellModels[indexPath.row]
         cell.configureCell(with: cellModel)
         return cell
     }
