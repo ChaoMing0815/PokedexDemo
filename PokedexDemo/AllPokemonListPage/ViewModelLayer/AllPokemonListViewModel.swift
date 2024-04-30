@@ -19,13 +19,20 @@ class AllPokemonListViewModel {
     let service = AllPokemonListService()
     var allPokemonNames = [String]()
     var pokemonNameForInfoPage: String?
+    var isLoadingAndPresentingNewPokemonList = false
     
     func loadAllPokemonList() {
+        if isLoadingAndPresentingNewPokemonList {
+            // 代表現在正在 loading data
+            return
+        }
+        isLoadingAndPresentingNewPokemonList = true
         service.loadAllPokemonList { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(allPokemonList):
-                allPokemonNames = allPokemonList.pokemonNames
+//                allPokemonNames = allPokemonList.pokemonNames
+                self.allPokemonNames.append(contentsOf: allPokemonList.pokemonNames)
                 self.delegate?.allPokemonListViewModel(self, allPokemonListDidUpdate: allPokemonList)
             case let .failure(error):
                 self.delegate?.allPokemonListViewModel(self, allPokemonListErrorDidUpdate: error)

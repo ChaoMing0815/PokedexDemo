@@ -13,46 +13,27 @@ class AllPokemonListViewController: UIViewController {
     let viewModel = AllPokemonListViewModel()
     lazy var pokemonListTableView = makeTableView()
     
-    let pokemonInfoHTTPClient = PokemonInfoHTTPClient()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Pokeomn List"
         
         view.addSubview(pokemonListTableView)
-        pokemonListTableView.constraint(top: view.snp.top, bottom: view.snp.bottom, left: view.snp.left, right: view.snp.right)
+        pokemonListTableView.constraint(top: view.safeAreaLayoutGuide.snp.top, bottom: view.safeAreaLayoutGuide.snp.bottom, left: view.snp.left, right: view.snp.right)
         
         viewModel.delegate = self
         viewModel.loadAllPokemonList()
         
-        pokemonInfoHTTPClient.requestPokemonInfo(with: "bulbasaur") { result in
-            switch result {
-            case let .success(data, response):
-                print(data)
-                let image = UIImage.init(data: data)
-                let imageView = UIImageView(image: image)
-            case let .failure(_):
-                return
-            }
-        }
-        
-        pokemonInfoHTTPClient.requestPokemonImage(with: "1") { result in
-            switch result {
-            case let .success(data):
-                print(data)
-            case .failure(_):
-                return
-            }
-        }
     }
 }
 
 extension AllPokemonListViewController: AllPokemonListViewModelDelegate {
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListDidUpdate allPokemonList: AllPokemonList) {
         pokemonListTableView.reloadData()
+        viewModel.isLoadingAndPresentingNewPokemonList = false
     }
     
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListErrorDidUpdate error: AllPokemonListServiceError) {
+        viewModel.isLoadingAndPresentingNewPokemonList = false
     }
 }
 
@@ -76,6 +57,17 @@ extension AllPokemonListViewController: UITableViewDataSource {
         let cellModel = viewModel.makeCellModel(with: indexPath)
         cell.configureCell(with: cellModel)
         return cell
+    }
+    
+    // 當 tableView 滑到底時
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // 取得當前 tableView 的最後一個 section 的最後一個 row (tableView 的最底下的 row)
+        let lastSectionIndex = tableView.numberOfSections - 1
+        let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
+        // 判斷最後一個 cell 是否有要被顯示
+        if indexPath.section == lastSectionIndex && indexPath.row == lastRowIndex {
+            viewModel.loadAllPokemonList()
+        }
     }
 }
 
