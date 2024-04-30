@@ -12,6 +12,13 @@ class AllPokemonListViewController: UIViewController {
     // MARK: - stored properties
     let viewModel = AllPokemonListViewModel()
     lazy var pokemonListTableView = makeTableView()
+    lazy var indicatorFooterView = makeIndicatorView()
+    var indicator: UIActivityIndicatorView {
+        return indicatorFooterView.indicator
+    }
+    var footerView: UIView {
+        indicatorFooterView.footerView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +29,27 @@ class AllPokemonListViewController: UIViewController {
         
         viewModel.delegate = self
         viewModel.loadAllPokemonList()
-        
+    }
+    
+    func makeIndicatorView() -> (footerView: UIView, indicator: UIActivityIndicatorView) {
+        let footerView = UIView(frame: .init(x: 0, y: 0, width: pokemonListTableView.frame.width, height: 50))
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.center = footerView.center
+        footerView.addSubview(indicator)
+        pokemonListTableView.tableFooterView = footerView
+        return (footerView, indicator)
     }
 }
 
 extension AllPokemonListViewController: AllPokemonListViewModelDelegate {
+    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, willLoadNewPokemonList: Bool) {
+        indicator.startAnimating()
+    }
+    
+    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, didLoadNewPokemonList: Bool) {
+        indicator.stopAnimating()
+    }
+    
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListDidUpdate allPokemonList: AllPokemonList) {
         pokemonListTableView.reloadData()
         viewModel.isLoadingAndPresentingNewPokemonList = false
@@ -68,6 +91,14 @@ extension AllPokemonListViewController: UITableViewDataSource {
         if indexPath.section == lastSectionIndex && indexPath.row == lastRowIndex {
             viewModel.loadAllPokemonList()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return footerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 50
     }
 }
 

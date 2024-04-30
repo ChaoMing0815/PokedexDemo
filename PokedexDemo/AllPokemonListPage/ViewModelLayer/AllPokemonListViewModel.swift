@@ -10,6 +10,8 @@ import Foundation
 protocol AllPokemonListViewModelDelegate: AnyObject {
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListDidUpdate allPokemonList: AllPokemonList)
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListErrorDidUpdate error: AllPokemonListServiceError)
+    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, willLoadNewPokemonList: Bool)
+    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, didLoadNewPokemonList: Bool)
 }
 
 // MARK: - Internal Methods and Network Service
@@ -26,9 +28,13 @@ class AllPokemonListViewModel {
             // 代表現在正在 loading data
             return
         }
+        // 代表要開始 loading data 了
+        delegate?.allPokemonListViewModel(self, willLoadNewPokemonList: true)
         isLoadingAndPresentingNewPokemonList = true
         service.loadAllPokemonList { [weak self] result in
             guard let self else { return }
+            // 已經從 server 拿回資料了
+            self.delegate?.allPokemonListViewModel(self, didLoadNewPokemonList: true)
             switch result {
             case let .success(allPokemonList):
                 self.allPokemonListCellModels += allPokemonList.pokemonNames.map { .init(name: $0)}
