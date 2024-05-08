@@ -31,6 +31,7 @@
 		3A91E8B92BD9EEBC00B015F0 /* PokemonInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8B82BD9EEBC00B015F0 /* PokemonInfoService.swift */; };
 		3A91E8BC2BD9F44100B015F0 /* PokemonInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8BB2BD9F44100B015F0 /* PokemonInfoViewModel.swift */; };
 		3A91E8BF2BD9FDEA00B015F0 /* PokemonInfoPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8BE2BD9FDEA00B015F0 /* PokemonInfoPageViewController.swift */; };
+		3A91E8D82BEBB9F700B015F0 /* AllPokemonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E8D72BEBB9F700B015F0 /* AllPokemonCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		3A91E8B82BD9EEBC00B015F0 /* PokemonInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoService.swift; sourceTree = "<group>"; };
 		3A91E8BB2BD9F44100B015F0 /* PokemonInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoViewModel.swift; sourceTree = "<group>"; };
 		3A91E8BE2BD9FDEA00B015F0 /* PokemonInfoPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoPageViewController.swift; sourceTree = "<group>"; };
+		3A91E8D72BEBB9F700B015F0 /* AllPokemonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				3A91E8AC2BD4EF3600B015F0 /* AllPokemonListCell.swift */,
+				3A91E8D72BEBB9F700B015F0 /* AllPokemonCollectionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				3A91E8A12BCFA16E00B015F0 /* AllPokemonListDTO.swift in Sources */,
 				3A91E8B32BD946A100B015F0 /* AllPokemonListCellModel.swift in Sources */,
 				3A91E8962BCF779000B015F0 /* HTTPClient.swift in Sources */,
+				3A91E8D82BEBB9F700B015F0 /* AllPokemonCollectionCell.swift in Sources */,
 				3A91E8A32BCFA3AC00B015F0 /* AllPokemonListService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
