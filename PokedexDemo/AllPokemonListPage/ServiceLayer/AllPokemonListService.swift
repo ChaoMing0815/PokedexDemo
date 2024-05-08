@@ -13,6 +13,8 @@ enum AllPokemonListServiceError: Error {
 
 class AllPokemonListService {
     let client = AllPokemonListHTTPClient()
+    let infoClient = PokemonInfoHTTPClient()
+    
     func loadAllPokemonList(completion: @escaping (Result<AllPokemonList, AllPokemonListServiceError>) -> Void) {
         client.requestAllPokemonList { [weak self] result in
             guard let self else { return }
@@ -30,6 +32,19 @@ class AllPokemonListService {
                     }
                 case .failure:
                     // do failure behavior
+                    completion(.failure(.NetworkError))
+                }
+            }
+        }
+    }
+    
+    func loadPokemonImage(with id: String, completion: @escaping (Result<Data, HTTPClientError>) -> Void) {
+        infoClient.requestPokemonImage(with: id) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case let .success((imageData, _)):
+                    completion(.success(imageData))
+                case .failure(_):
                     completion(.failure(.NetworkError))
                 }
             }
