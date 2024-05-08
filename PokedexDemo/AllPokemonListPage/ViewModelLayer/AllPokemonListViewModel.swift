@@ -37,7 +37,7 @@ class AllPokemonListViewModel {
             self.delegate?.allPokemonListViewModel(self, didLoadNewPokemonList: true)
             switch result {
             case let .success(allPokemonList):
-                self.allPokemonListCellModels += allPokemonList.pokemonNames.map { .init(name: $0)}
+                self.allPokemonListCellModels += allPokemonList.allPokemonInfos.map { .init(name: $0.name) }
                 self.delegate?.allPokemonListViewModel(self, allPokemonListDidUpdate: allPokemonList)
             case let .failure(error):
                 self.delegate?.allPokemonListViewModel(self, allPokemonListErrorDidUpdate: error)
