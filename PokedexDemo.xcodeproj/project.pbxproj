@@ -130,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				3A91E85B2BCF64E600B015F0 /* AppDelegate.swift */,
+				3A91E89A2BCFA0C100B015F0 /* NetworkLayer */,
 				3A91E8AE2BD8E1AB00B015F0 /* PokemonInfoPage */,
 				3A91E8972BCF78B600B015F0 /* AllPokemonListPage */,
 				3A91E88F2BCF717600B015F0 /* AutolayoutHelpers */,
@@ -183,8 +184,6 @@
 				3A91E89D2BCFA0EA00B015F0 /* ModelLayer */,
 				3A91E89C2BCFA0DF00B015F0 /* ViewModelLayer */,
 				3A91E89B2BCFA0D100B015F0 /* ServiceLayer */,
-				3A91E89A2BCFA0C100B015F0 /* NetworkLayer */,
-				3A91E8982BCF78D700B015F0 /* AllPokemonListHTTPClient.swift */,
 			);
 			path = AllPokemonListPage;
 			sourceTree = "<group>";
@@ -192,6 +191,8 @@
 		3A91E89A2BCFA0C100B015F0 /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
+				3A91E8B02BD8E21C00B015F0 /* PokemonInfoHTTPClient.swift */,
+				3A91E8982BCF78D700B015F0 /* AllPokemonListHTTPClient.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -245,17 +246,8 @@
 				3A91E8BA2BD9F42400B015F0 /* ViewModelLayer */,
 				3A91E8B52BD9EB6D00B015F0 /* ModelLayer */,
 				3A91E8B42BD9EB6200B015F0 /* ServiceLayer */,
-				3A91E8AF2BD8E1DD00B015F0 /* NetworkLayer */,
 			);
 			path = PokemonInfoPage;
-			sourceTree = "<group>";
-		};
-		3A91E8AF2BD8E1DD00B015F0 /* NetworkLayer */ = {
-			isa = PBXGroup;
-			children = (
-				3A91E8B02BD8E21C00B015F0 /* PokemonInfoHTTPClient.swift */,
-			);
-			path = NetworkLayer;
 			sourceTree = "<group>";
 		};
 		3A91E8B42BD9EB6200B015F0 /* ServiceLayer */ = {
