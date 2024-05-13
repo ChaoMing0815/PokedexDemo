@@ -28,7 +28,7 @@ class AllPokemonListViewController: UIViewController {
         pokemonListCollectionView.constraint(top: view.safeAreaLayoutGuide.snp.top, bottom: view.safeAreaLayoutGuide.snp.bottom, left: view.snp.left, right: view.snp.right)
         
         viewModel.delegate = self
-        viewModel.loadAllPokemonList()
+        viewModel.loadAllPokemonListAndImage()
     }
     
     func makeIndicatorView() -> (footerView: UIView, indicator: UIActivityIndicatorView) {
@@ -64,19 +64,24 @@ extension AllPokemonListViewController {
     func makeCollectionView() -> UICollectionView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 20) / 2, height: 200)
         let collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
+        collectionView.register(AllPokemonCollectionCell.self, forCellWithReuseIdentifier: String(describing: AllPokemonCollectionCell.self))
         return collectionView
     }
 }
 
 extension AllPokemonListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return viewModel.allPokemonListCellModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: AllPokemonCollectionCell.self), for: indexPath) as! AllPokemonCollectionCell
+        let cellModel = viewModel.allPokemonListCellModels[indexPath.row]
+        cell.nameLabel.text = cellModel.name
+        cell.pokeImage.image = UIImage(data: cellModel.imageData!)
         return cell
     }
 }

@@ -23,22 +23,35 @@ class AllPokemonListViewModel {
     var pokemonNameForInfoPage: String?
     var isLoadingAndPresentingNewPokemonList = false
     
-    func loadAllPokemonList() {
+    func loadAllPokemonListAndImage() {
         if isLoadingAndPresentingNewPokemonList {
-            // 代表現在正在 loading data
             return
         }
-        // 代表要開始 loading data 了
         delegate?.allPokemonListViewModel(self, willLoadNewPokemonList: true)
         isLoadingAndPresentingNewPokemonList = true
         service.loadAllPokemonList { [weak self] result in
             guard let self else { return }
-            // 已經從 server 拿回資料了
             self.delegate?.allPokemonListViewModel(self, didLoadNewPokemonList: true)
             switch result {
             case let .success(allPokemonList):
-                self.allPokemonListCellModels += allPokemonList.allPokemonInfos.map { .init(name: $0.name) }
-                self.delegate?.allPokemonListViewModel(self, allPokemonListDidUpdate: allPokemonList)
+                let allPokemonInfos = allPokemonList.allPokemonInfos
+                let group = DispatchGroup()
+                for pokemonInfo in allPokemonInfos {
+                    group.enter()
+                    self.service.loadPokemonImage(with: pokemonInfo.id) { result in
+                        defer { group.leave() }
+                        switch result {
+                        case let .success(imageData):
+                            let cellModel = AllPokemonListCellModel(name: pokemonInfo.name, imageData: imageData)
+                            self.allPokemonListCellModels.append(cellModel)
+                        case .failure(_):
+                            print("Fail to load image data for \(pokemonInfo.id)")
+                        }
+                    }
+                }
+                group.notify(queue: .main) {
+                    self.delegate?.allPokemonListViewModel(self, allPokemonListDidUpdate: allPokemonList)
+                }
             case let .failure(error):
                 self.delegate?.allPokemonListViewModel(self, allPokemonListErrorDidUpdate: error)
             }

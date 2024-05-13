@@ -38,6 +38,7 @@ fileprivate extension PokemonInfoHTTPClient {
     func makePokemonImageRequest(with id: String) -> RequestType {
         let url = URL.init(string: "https://raw.githubusercontent.com")!
         let path = "/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/\(id).png"
-        return RequestType.init(httpMethod: .GET, domainURL: url, path: path, headers: headers)
+        let requestType = RequestType.init(httpMethod: .GET, domainURL: url, path: path, headers: headers)
+        return requestType
     }
 }

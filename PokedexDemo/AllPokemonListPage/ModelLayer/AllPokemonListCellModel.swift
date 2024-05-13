@@ -9,4 +9,5 @@ import Foundation
 
 struct AllPokemonListCellModel {
     let name: String
+    var imageData: Data?
 }
