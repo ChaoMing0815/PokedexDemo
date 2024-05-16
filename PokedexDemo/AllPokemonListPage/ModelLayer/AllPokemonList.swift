@@ -40,6 +40,10 @@ struct AllPokemonList {
             print("No numeric component found in URL")
             return nil
         }
-        return String(describing: Int(lastNumberString))
+        guard let idNumber = Int(lastNumberString) else {
+            print("Can not convert lastNumberString to Int!")
+            return nil
+        }
+        return String(describing: idNumber)
     }
 }
