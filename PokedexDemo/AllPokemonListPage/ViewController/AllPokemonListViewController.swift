@@ -42,17 +42,17 @@ class AllPokemonListViewController: UIViewController {
 }
 
 extension AllPokemonListViewController: AllPokemonListViewModelDelegate {
+    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, cellModelsDidUpdate cellModels: [AllPokemonListCellModel]) {
+        pokemonListCollectionView.reloadData()
+        viewModel.isLoadingAndPresentingNewPokemonList = false
+    }
+    
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, willLoadNewPokemonList: Bool) {
         indicator.startAnimating()
     }
     
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, didLoadNewPokemonList: Bool) {
         indicator.stopAnimating()
-    }
-    
-    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListDidUpdate allPokemonList: AllPokemonList) {
-        pokemonListCollectionView.reloadData()
-        viewModel.isLoadingAndPresentingNewPokemonList = false
     }
     
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListErrorDidUpdate error: AllPokemonListServiceError) {
@@ -76,12 +76,12 @@ extension AllPokemonListViewController {
 
 extension AllPokemonListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.allPokemonListCellModels.count
+        return viewModel.cellModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: AllPokemonCollectionCell.self), for: indexPath) as! AllPokemonCollectionCell
-        let cellModel = viewModel.allPokemonListCellModels[indexPath.row]
+        let cellModel = viewModel.cellModels[indexPath.row]
         cell.configureCell(with: cellModel)
         return cell
     }

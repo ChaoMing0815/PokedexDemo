@@ -8,6 +8,7 @@
 import Foundation
 
 struct AllPokemonListCellModel {
+    let id: String
     let name: String
     var imageData: Data?
 }

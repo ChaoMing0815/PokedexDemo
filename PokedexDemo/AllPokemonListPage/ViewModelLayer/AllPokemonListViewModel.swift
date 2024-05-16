@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AllPokemonListViewModelDelegate: AnyObject {
-    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListDidUpdate allPokemonList: AllPokemonList)
+    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, cellModelsDidUpdate cellModels: [AllPokemonListCellModel])
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListErrorDidUpdate error: AllPokemonListServiceError)
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, willLoadNewPokemonList: Bool)
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, didLoadNewPokemonList: Bool)
@@ -19,7 +19,7 @@ class AllPokemonListViewModel {
     weak var delegate: AllPokemonListViewModelDelegate?
     
     let service = AllPokemonListService()
-    var allPokemonListCellModels = [AllPokemonListCellModel]()
+    var cellModels = [AllPokemonListCellModel]()
     var pokemonNameForInfoPage: String?
     var isLoadingAndPresentingNewPokemonList = false
     
@@ -42,15 +42,16 @@ class AllPokemonListViewModel {
                         defer { group.leave() }
                         switch result {
                         case let .success(imageData):
-                            let cellModel = AllPokemonListCellModel(name: pokemonInfo.name, imageData: imageData)
-                            self.allPokemonListCellModels.append(cellModel)
+                            let cellModel = AllPokemonListCellModel(id: pokemonInfo.id, name: pokemonInfo.name, imageData: imageData)
+                            self.cellModels.append(cellModel)
                         case .failure(_):
                             print("Fail to load image data for \(pokemonInfo.id)")
                         }
                     }
                 }
                 group.notify(queue: .main) {
-                    self.delegate?.allPokemonListViewModel(self, allPokemonListDidUpdate: allPokemonList)
+                    self.cellModels.sort(by: { Int($0.id)! < Int($1.id)! })
+                    self.delegate?.allPokemonListViewModel(self, cellModelsDidUpdate: self.cellModels)
                 }
             case let .failure(error):
                 self.delegate?.allPokemonListViewModel(self, allPokemonListErrorDidUpdate: error)
@@ -59,7 +60,7 @@ class AllPokemonListViewModel {
     }
     
     func setupPokemonNameForInfoPage(with indexPath: IndexPath) {
-        let name = allPokemonListCellModels[indexPath.row].name
+        let name = cellModels[indexPath.row].name
         pokemonNameForInfoPage = name
     }
 }
