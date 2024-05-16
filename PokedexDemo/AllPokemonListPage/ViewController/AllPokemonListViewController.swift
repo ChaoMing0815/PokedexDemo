@@ -44,7 +44,7 @@ class AllPokemonListViewController: UIViewController {
 extension AllPokemonListViewController: AllPokemonListViewModelDelegate {
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, cellModelsDidUpdate cellModels: [AllPokemonListCellModel]) {
         pokemonListCollectionView.reloadData()
-        viewModel.isLoadingAndPresentingNewPokemonList = false
+        
     }
     
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, willLoadNewPokemonList: Bool) {
@@ -56,7 +56,7 @@ extension AllPokemonListViewController: AllPokemonListViewModelDelegate {
     }
     
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListErrorDidUpdate error: AllPokemonListServiceError) {
-        viewModel.isLoadingAndPresentingNewPokemonList = false
+        
     }
 }
 
@@ -85,7 +85,14 @@ extension AllPokemonListViewController: UICollectionViewDataSource {
         cell.configureCell(with: cellModel)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let lastSectionIndex = collectionView.numberOfSections - 1
+        let lastItemIndex = collectionView.numberOfItems(inSection: lastSectionIndex) - 1
+        viewModel.loadNewPokemons(withIndexPath: indexPath, lastSectionIndex: lastSectionIndex, lastItemIndex: lastItemIndex)
+    }
 }
+
 
 extension AllPokemonListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

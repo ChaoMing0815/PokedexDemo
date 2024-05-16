@@ -50,10 +50,12 @@ class AllPokemonListViewModel {
                     }
                 }
                 group.notify(queue: .main) {
+                    self.isLoadingAndPresentingNewPokemonList = false
                     self.cellModels.sort(by: { Int($0.id)! < Int($1.id)! })
                     self.delegate?.allPokemonListViewModel(self, cellModelsDidUpdate: self.cellModels)
                 }
             case let .failure(error):
+                self.isLoadingAndPresentingNewPokemonList = false
                 self.delegate?.allPokemonListViewModel(self, allPokemonListErrorDidUpdate: error)
             }
         }
@@ -62,5 +64,16 @@ class AllPokemonListViewModel {
     func setupPokemonNameForInfoPage(with indexPath: IndexPath) {
         let name = cellModels[indexPath.row].name
         pokemonNameForInfoPage = name
+    }
+}
+
+
+extension AllPokemonListViewModel {
+    func loadNewPokemons(withIndexPath indexPath: IndexPath, lastSectionIndex: Int, lastItemIndex: Int) {
+        if indexPath.section == lastSectionIndex && indexPath.item == lastItemIndex {
+            if !self.isLoadingAndPresentingNewPokemonList {
+                self.loadAllPokemonListAndImage()
+            }
+        }
     }
 }
