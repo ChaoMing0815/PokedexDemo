@@ -31,7 +31,6 @@ class AllPokemonListViewModel {
         isLoadingAndPresentingNewPokemonList = true
         service.loadAllPokemonList { [weak self] result in
             guard let self else { return }
-//            self.delegate?.allPokemonListViewModel(self, didLoadNewPokemonList: true)
             switch result {
             case let .success(allPokemonList):
                 let allPokemonInfos = allPokemonList.allPokemonInfos
@@ -50,6 +49,7 @@ class AllPokemonListViewModel {
                     }
                 }
                 group.notify(queue: .main) {
+                    self.delegate?.allPokemonListViewModel(self, didLoadNewPokemonList: true)
                     self.isLoadingAndPresentingNewPokemonList = false
                     self.cellModels.sort(by: { Int($0.id)! < Int($1.id)! })
                     self.delegate?.allPokemonListViewModel(self, cellModelsDidUpdate: self.cellModels)

@@ -12,13 +12,7 @@ class AllPokemonListViewController: UIViewController {
     // MARK: - stored properties
     let viewModel = AllPokemonListViewModel()
     lazy var pokemonListCollectionView = makeCollectionView()
-    lazy var indicatorFooterView = makeIndicatorView()
-    var indicator: UIActivityIndicatorView {
-        return indicatorFooterView.indicator
-    }
-    var footerView: UIView {
-        indicatorFooterView.footerView
-    }
+    lazy var indicator = makeIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +25,9 @@ class AllPokemonListViewController: UIViewController {
         viewModel.loadAllPokemonListAndImage()
     }
     
-    func makeIndicatorView() -> (footerView: UIView, indicator: UIActivityIndicatorView) {
-        let footerView = UIView(frame: .init(x: 0, y: 0, width: pokemonListCollectionView.frame.width, height: 50))
+    func makeIndicatorView() -> UIActivityIndicatorView {
         let indicator = UIActivityIndicatorView(style: .medium)
-        indicator.center = footerView.center
-        footerView.addSubview(indicator)
-        
-        return (footerView, indicator)
+        return indicator
     }
 }
 
@@ -70,6 +60,7 @@ extension AllPokemonListViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(AllPokemonCollectionCell.self, forCellWithReuseIdentifier: String(describing: AllPokemonCollectionCell.self))
+        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: UICollectionReusableView.self))
         return collectionView
     }
 }
@@ -90,6 +81,21 @@ extension AllPokemonListViewController: UICollectionViewDataSource {
         let lastSectionIndex = collectionView.numberOfSections - 1
         let lastItemIndex = collectionView.numberOfItems(inSection: lastSectionIndex) - 1
         viewModel.loadNewPokemons(withIndexPath: indexPath, lastSectionIndex: lastSectionIndex, lastItemIndex: lastItemIndex)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionFooter {
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: UICollectionReusableView.self), for: indexPath)
+            footerView.addSubview(indicator)
+            indicator.fillWithCenter(with: .init(width: 25, height: 25))
+            return footerView
+        }
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        let width = collectionView.bounds.width
+        return .init(width: width, height: 50)
     }
 }
 
