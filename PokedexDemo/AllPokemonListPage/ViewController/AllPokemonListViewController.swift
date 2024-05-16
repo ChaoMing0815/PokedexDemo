@@ -62,11 +62,13 @@ extension AllPokemonListViewController: AllPokemonListViewModelDelegate {
 
 extension AllPokemonListViewController {
     func makeCollectionView() -> UICollectionView {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 20) / 2, height: 200)
-        let collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: layout)
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumInteritemSpacing = 5
+        flowLayout.minimumLineSpacing = 50
+        flowLayout.scrollDirection = .vertical
+        let collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(AllPokemonCollectionCell.self, forCellWithReuseIdentifier: String(describing: AllPokemonCollectionCell.self))
         return collectionView
     }
@@ -80,52 +82,17 @@ extension AllPokemonListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: AllPokemonCollectionCell.self), for: indexPath) as! AllPokemonCollectionCell
         let cellModel = viewModel.allPokemonListCellModels[indexPath.row]
-        cell.nameLabel.text = cellModel.name
-        cell.pokeImage.image = UIImage(data: cellModel.imageData!)
+        cell.configureCell(with: cellModel)
         return cell
     }
 }
 
-//extension AllPokemonListViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return viewModel.allPokemonListCellModels.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AllPokemonListCell.self), for: indexPath) as! AllPokemonListCell
-//        let cellModel = viewModel.allPokemonListCellModels[indexPath.row]
-//        cell.configureCell(with: cellModel)
-//        return cell
-//    }
-    
-    // 當 tableView 滑到底時
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        // 取得當前 tableView 的最後一個 section 的最後一個 row (tableView 的最底下的 row)
-//        let lastSectionIndex = tableView.numberOfSections - 1
-//        let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
-//        // 判斷最後一個 cell 是否有要被顯示
-//        if indexPath.section == lastSectionIndex && indexPath.row == lastRowIndex {
-//            viewModel.loadAllPokemonList()
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        return footerView
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 50
-//    }
-//}
-
-//extension AllPokemonListViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        viewModel.setupPokemonNameForInfoPage(with: indexPath)
-//        let pokemonInfoPageViewController = PokemonInfoPageViewController()
-//        pokemonInfoPageViewController.dataSource = self
-//        navigationController?.pushViewController(pokemonInfoPageViewController, animated: true)
-//    }
-//}
+extension AllPokemonListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = UIScreen.main.bounds.width / 2 - 16
+        return .init(width: width, height: 250)
+    }
+}
 
 extension AllPokemonListViewController: PokemonInfoPageViewControllerDataSource {
     var pokemonName: String {

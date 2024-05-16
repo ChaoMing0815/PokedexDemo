@@ -10,31 +10,55 @@ import UIKit
 
 class AllPokemonCollectionCell: UICollectionViewCell {
     lazy var nameLabel = makeNameLabel()
-    lazy var pokeImage = makeImageView()
-    lazy var background = makeBackgroundView()
+    lazy var pokeImageView = makeImageView()
+    lazy var bgView = makeBackgroundView()
     
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        contentView.addSubview(background)
-        background.constraint(top: contentView.snp.top, bottom: contentView.snp.bottom, left: contentView.snp.left, size: .init(width: 80, height: 160))
-        background.addSubview(nameLabel)
-        background.addSubview(pokeImage)
-        nameLabel.constraint(bottom: background.snp.bottom, centerX: background.snp.centerX, padding: .init(top: 0, left: 0, bottom: 10, right: 0))
-        pokeImage.constraint(top: background.snp.top, bottom: background.snp.bottom, left: background.snp.left, right: background.snp.right, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
-        pokeImage.contentMode = .center
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
+// MARK: - Internal Methods
+extension AllPokemonCollectionCell {
+    func configureCell(with cellModel: AllPokemonListCellModel) {
+        nameLabel.text = cellModel.name
+        if let imageData = cellModel.imageData {
+            let image = UIImage(data: imageData)
+            pokeImageView.image = image
+            
+            let bgColor = image?.getDominantColor(brightnessAdjustment: 0.5) ?? .darkGray
+            bgView.backgroundColor = bgColor
+        }
+       
+    }
+}
+// MARK: - Layout
+extension AllPokemonCollectionCell {
+    fileprivate func setupLayout() {
+        [bgView, nameLabel, pokeImageView].forEach { contentView.addSubview($0) }
+        bgView.fillWithPadding(with: .init(top: 16, left: 16, bottom: 0, right: 16))
+        nameLabel.constraint(bottom: contentView.snp.bottom, left: contentView.snp.left, right: contentView.snp.right, padding: .init(top: 0, left: 8, bottom: 16, right: 8))
+        pokeImageView.constraint(top: contentView.snp.top, bottom: nameLabel.snp.top, left: contentView.snp.left, right: contentView.snp.right, padding: .init(top: 0, left: 0, bottom: 8, right: 0))
+    }
+}
+
+// MARK: - Factory Methods
 extension AllPokemonCollectionCell {
     fileprivate func makeNameLabel() -> UILabel {
         let nameLabel = UILabel()
+        nameLabel.numberOfLines = 2
+        nameLabel.textAlignment = .center
         return nameLabel
     }
     
     fileprivate func makeImageView() -> UIImageView {
         let pokeImageView = UIImageView()
-        pokeImageView.backgroundColor = .blue
+        pokeImageView.contentMode = .scaleAspectFill
         return pokeImageView
     }
     

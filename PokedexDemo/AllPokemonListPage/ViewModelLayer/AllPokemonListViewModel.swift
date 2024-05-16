@@ -31,7 +31,7 @@ class AllPokemonListViewModel {
         isLoadingAndPresentingNewPokemonList = true
         service.loadAllPokemonList { [weak self] result in
             guard let self else { return }
-            self.delegate?.allPokemonListViewModel(self, didLoadNewPokemonList: true)
+//            self.delegate?.allPokemonListViewModel(self, didLoadNewPokemonList: true)
             switch result {
             case let .success(allPokemonList):
                 let allPokemonInfos = allPokemonList.allPokemonInfos
