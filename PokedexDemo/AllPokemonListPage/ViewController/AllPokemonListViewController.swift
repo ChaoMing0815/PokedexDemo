@@ -57,6 +57,7 @@ extension AllPokemonListViewController {
         flowLayout.minimumLineSpacing = 50
         flowLayout.scrollDirection = .vertical
         let collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = .black
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(AllPokemonCollectionCell.self, forCellWithReuseIdentifier: String(describing: AllPokemonCollectionCell.self))
@@ -104,6 +105,13 @@ extension AllPokemonListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = UIScreen.main.bounds.width / 2 - 16
         return .init(width: width, height: 250)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let destinationViewController = PokemonInfoPageViewController()
+        destinationViewController.dataSource = self
+        viewModel.setupPokemonNameForInfoPage(with: indexPath)
+               navigationController?.pushViewController(destinationViewController, animated: true)
     }
 }
 
