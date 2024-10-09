@@ -16,7 +16,7 @@ class AllPokemonListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Pokeomn List"
+        title = "Pokemon List"
         
         view.addSubview(pokemonListCollectionView)
         pokemonListCollectionView.constraint(top: view.safeAreaLayoutGuide.snp.top, bottom: view.safeAreaLayoutGuide.snp.bottom, left: view.snp.left, right: view.snp.right)
@@ -50,6 +50,7 @@ extension AllPokemonListViewController: AllPokemonListViewModelDelegate {
     }
 }
 
+// MARK: - Factory Methods
 extension AllPokemonListViewController {
     func makeCollectionView() -> UICollectionView {
         let flowLayout = UICollectionViewFlowLayout()
@@ -66,6 +67,7 @@ extension AllPokemonListViewController {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension AllPokemonListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.cellModels.count
@@ -101,20 +103,39 @@ extension AllPokemonListViewController: UICollectionViewDataSource {
 }
 
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension AllPokemonListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = UIScreen.main.bounds.width / 2 - 16
+        let spacing: CGFloat = 16
+        let totalSpacing: CGFloat = spacing * 3
+        let width = (UIScreen.main.bounds.width - totalSpacing) / 2
         return .init(width: width, height: 250)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        // 設定 Cell 之間的間距
+        return 16
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        // 設定 Cell 的垂直間距
+        return 16
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        // 設定 Section 的邊距（頂部、左側、底部、右側），使得左右邊距與中間間距相等
+        return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destinationViewController = PokemonInfoPageViewController()
         destinationViewController.dataSource = self
         viewModel.setupPokemonNameForInfoPage(with: indexPath)
-               navigationController?.pushViewController(destinationViewController, animated: true)
+        navigationController?.pushViewController(destinationViewController, animated: true)
     }
 }
 
+// MARK: - PokemonInfoPageViewControllerDataSource
 extension AllPokemonListViewController: PokemonInfoPageViewControllerDataSource {
     var pokemonName: String {
         guard let name = viewModel.pokemonNameForInfoPage else {
