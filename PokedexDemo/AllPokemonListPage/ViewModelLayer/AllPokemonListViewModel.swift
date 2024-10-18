@@ -20,7 +20,7 @@ class AllPokemonListViewModel {
     
     let service = AllPokemonListService()
     var cellModels = [AllPokemonListCellModel]()
-    var pokemonNameForInfoPage: String?
+    var pokemonIDForInfoPage: String?
     var isLoadingAndPresentingNewPokemonList = false
     
     func loadAllPokemonListAndImage() {
@@ -61,9 +61,9 @@ class AllPokemonListViewModel {
         }
     }
     
-    func setupPokemonNameForInfoPage(with indexPath: IndexPath) {
-        let name = cellModels[indexPath.row].name
-        pokemonNameForInfoPage = name
+    func setupPokemonIDForInfoPage(with indexPath: IndexPath) {
+        let id = cellModels[indexPath.row].id
+        pokemonIDForInfoPage = id
     }
 }
 

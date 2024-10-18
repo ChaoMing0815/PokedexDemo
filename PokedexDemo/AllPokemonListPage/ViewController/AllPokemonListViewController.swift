@@ -14,13 +14,14 @@ class AllPokemonListViewController: UIViewController {
     lazy var pokemonListCollectionView = makeCollectionView()
     lazy var indicator = makeIndicatorView()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Pokemon List"
         
         view.addSubview(pokemonListCollectionView)
         pokemonListCollectionView.constraint(top: view.safeAreaLayoutGuide.snp.top, bottom: view.safeAreaLayoutGuide.snp.bottom, left: view.snp.left, right: view.snp.right)
-        
+
         viewModel.delegate = self
         viewModel.loadAllPokemonListAndImage()
     }
@@ -31,6 +32,7 @@ class AllPokemonListViewController: UIViewController {
     }
 }
 
+// MARK: - AllPokemonListViewModelDelegate
 extension AllPokemonListViewController: AllPokemonListViewModelDelegate {
     func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, cellModelsDidUpdate cellModels: [AllPokemonListCellModel]) {
         pokemonListCollectionView.reloadData()
@@ -130,17 +132,17 @@ extension AllPokemonListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destinationViewController = PokemonInfoPageViewController()
         destinationViewController.dataSource = self
-        viewModel.setupPokemonNameForInfoPage(with: indexPath)
+        viewModel.setupPokemonIDForInfoPage(with: indexPath)
         navigationController?.pushViewController(destinationViewController, animated: true)
     }
 }
 
 // MARK: - PokemonInfoPageViewControllerDataSource
 extension AllPokemonListViewController: PokemonInfoPageViewControllerDataSource {
-    var pokemonName: String {
-        guard let name = viewModel.pokemonNameForInfoPage else {
-            fatalError("PokemonNameForInfoPage should not be nil!")
+    var SelectedPokemonID: String {
+        guard let id = viewModel.pokemonIDForInfoPage else {
+            fatalError("PokemonIDForInfoPage should not be nil!")
         }
-        return name
-    }
+        return id
+    }    
 }
