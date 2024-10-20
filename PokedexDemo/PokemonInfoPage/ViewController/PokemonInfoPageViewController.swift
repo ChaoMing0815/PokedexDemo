@@ -34,6 +34,7 @@ class PokemonInfoPageViewController: UIViewController {
         super.viewDidLoad()
         setupLayout()
         
+        view.layer.insertSublayer(makeGradientLayer(), at: 0)
         viewModel.delegate = self
         setupIDsToLoadPokemonInfoAndImage()
         
@@ -115,12 +116,22 @@ extension PokemonInfoPageViewController {
         let collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.decelerationRate = .fast // 讓滾動效果更自然
-        collectionView.backgroundColor = .black
+        collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(PokemonInfoCell.self, forCellWithReuseIdentifier: String(describing: PokemonInfoCell.self))
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: UICollectionReusableView.self))
         return collectionView
+    }
+    
+    func makeGradientLayer() -> CAGradientLayer {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [UIColor.black.cgColor, UIColor.blue.cgColor] // 定義漸層顏色
+        gradientLayer.locations = [0.4, 1.0] //設置顏色過渡點，表示第一個顏色佔比60%
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0) // 漸層的起點
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1) // 漸層的終點
+        return gradientLayer
     }
 }
 
@@ -134,6 +145,7 @@ extension PokemonInfoPageViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PokemonInfoCell.self), for: indexPath) as! PokemonInfoCell
         let cellModel = viewModel.cellModels[indexPath.row]
         cell.configureCell(with: cellModel)
+        cell.backgroundColor = .clear
         return cell
     }
     

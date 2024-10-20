@@ -19,6 +19,7 @@ class AllPokemonListViewController: UIViewController {
         super.viewDidLoad()
         title = "Pokemon List"
         
+        view.layer.insertSublayer(makeGradientLayer(), at: 0)
         view.addSubview(pokemonListCollectionView)
         pokemonListCollectionView.constraint(top: view.safeAreaLayoutGuide.snp.top, bottom: view.safeAreaLayoutGuide.snp.bottom, left: view.snp.left, right: view.snp.right)
 
@@ -60,12 +61,22 @@ extension AllPokemonListViewController {
         flowLayout.minimumLineSpacing = 50
         flowLayout.scrollDirection = .vertical
         let collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.backgroundColor = .black
+        collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(AllPokemonCollectionCell.self, forCellWithReuseIdentifier: String(describing: AllPokemonCollectionCell.self))
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: UICollectionReusableView.self))
         return collectionView
+    }
+    
+    func makeGradientLayer() -> CAGradientLayer {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [UIColor.black.cgColor, UIColor.blue.cgColor] // 定義漸層顏色
+        gradientLayer.locations = [0.4, 1.0] //設置顏色過渡點，表示第一個顏色佔比60%
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0) // 漸層的起點
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1) // 漸層的終點
+        return gradientLayer
     }
 }
 
@@ -108,6 +119,7 @@ extension AllPokemonListViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension AllPokemonListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // 設定間隔以計算Cell寬度
         let spacing: CGFloat = 16
         let totalSpacing: CGFloat = spacing * 3
         let width = (UIScreen.main.bounds.width - totalSpacing) / 2
