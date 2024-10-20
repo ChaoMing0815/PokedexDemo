@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A5E8B032CC29F8F001E0906 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E8B022CC29F8F001E0906 /* HomePageViewController.swift */; };
+		3A5E8B072CC2A2F5001E0906 /* HomePageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E8B062CC2A2F5001E0906 /* HomePageTableViewCell.swift */; };
+		3A5E8B0C2CC4EAB3001E0906 /* HomePageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E8B0B2CC4EAB3001E0906 /* HomePageCellModel.swift */; };
+		3A5E8B0E2CC4ECAD001E0906 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E8B0D2CC4ECAD001E0906 /* HomePageViewModel.swift */; };
 		3A91E85C2BCF64E600B015F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91E85B2BCF64E600B015F0 /* AppDelegate.swift */; };
 		3A91E8652BCF64E700B015F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A91E8642BCF64E700B015F0 /* Assets.xcassets */; };
 		3A91E8682BCF64E700B015F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A91E8662BCF64E700B015F0 /* LaunchScreen.storyboard */; };
@@ -55,6 +59,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A5E8B022CC29F8F001E0906 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		3A5E8B062CC2A2F5001E0906 /* HomePageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageTableViewCell.swift; sourceTree = "<group>"; };
+		3A5E8B0B2CC4EAB3001E0906 /* HomePageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCellModel.swift; sourceTree = "<group>"; };
+		3A5E8B0D2CC4ECAD001E0906 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		3A91E8582BCF64E600B015F0 /* PokedexDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokedexDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A91E85B2BCF64E600B015F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A91E8642BCF64E700B015F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -141,6 +149,49 @@
 			path = DomainModel;
 			sourceTree = "<group>";
 		};
+		3A5E8B012CC29F69001E0906 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				3A5E8B0A2CC4EA91001E0906 /* CellModel */,
+				3A5E8B052CC2A2D6001E0906 /* View */,
+				3A5E8B042CC2A2CB001E0906 /* ViewController */,
+				3A5E8B0F2CC4ECB2001E0906 /* ViewModel */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		3A5E8B042CC2A2CB001E0906 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3A5E8B022CC29F8F001E0906 /* HomePageViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		3A5E8B052CC2A2D6001E0906 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3A5E8B062CC2A2F5001E0906 /* HomePageTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3A5E8B0A2CC4EA91001E0906 /* CellModel */ = {
+			isa = PBXGroup;
+			children = (
+				3A5E8B0B2CC4EAB3001E0906 /* HomePageCellModel.swift */,
+			);
+			path = CellModel;
+			sourceTree = "<group>";
+		};
+		3A5E8B0F2CC4ECB2001E0906 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3A5E8B0D2CC4ECAD001E0906 /* HomePageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		3A91E84F2BCF64E600B015F0 = {
 			isa = PBXGroup;
 			children = (
@@ -165,12 +216,13 @@
 			isa = PBXGroup;
 			children = (
 				3A91E85B2BCF64E600B015F0 /* AppDelegate.swift */,
-				3A5E8AFD2CC2487F001E0906 /* Model */,
-				3A91E89A2BCFA0C100B015F0 /* NetworkLayer */,
-				3A91E8AE2BD8E1AB00B015F0 /* PokemonInfoPage */,
-				3A91E8972BCF78B600B015F0 /* AllPokemonListPage */,
-				3A91E8D92BF5D13E00B015F0 /* Utils */,
 				3A91E88B2BCF703300B015F0 /* NetworkModule */,
+				3A91E89A2BCFA0C100B015F0 /* NetworkLayer */,
+				3A5E8AFD2CC2487F001E0906 /* Model */,
+				3A5E8B012CC29F69001E0906 /* HomePage */,
+				3A91E8972BCF78B600B015F0 /* AllPokemonListPage */,
+				3A91E8AE2BD8E1AB00B015F0 /* PokemonInfoPage */,
+				3A91E8D92BF5D13E00B015F0 /* Utils */,
 				3A91E8642BCF64E700B015F0 /* Assets.xcassets */,
 				3A91E8662BCF64E700B015F0 /* LaunchScreen.storyboard */,
 				3A91E8692BCF64E700B015F0 /* Info.plist */,
@@ -475,15 +527,19 @@
 				3A91E8B72BD9EDD100B015F0 /* PokemonInfo.swift in Sources */,
 				3A91E8A72BCFB06100B015F0 /* AllPokemonListViewModel.swift in Sources */,
 				3A91E8B92BD9EEBC00B015F0 /* PokemonInfoService.swift in Sources */,
+				3A5E8B0E2CC4ECAD001E0906 /* HomePageViewModel.swift in Sources */,
 				3A91E8BC2BD9F44100B015F0 /* PokemonInfoViewModel.swift in Sources */,
 				3A91E85C2BCF64E600B015F0 /* AppDelegate.swift in Sources */,
 				3A91E89F2BCFA11300B015F0 /* PokemonInfoDTO.swift in Sources */,
+				3A5E8B072CC2A2F5001E0906 /* HomePageTableViewCell.swift in Sources */,
 				3A91E8AA2BD154C400B015F0 /* AllPokemonListViewController.swift in Sources */,
 				3AC145122CB6BAAF00C0B49E /* PokemonInfoCellModel.swift in Sources */,
 				3A91E88D2BCF705D00B015F0 /* RequestType.swift in Sources */,
+				3A5E8B032CC29F8F001E0906 /* HomePageViewController.swift in Sources */,
 				3A91E8DC2BF5D17400B015F0 /* UIImage+DomainColorExtension.swift in Sources */,
 				3A91E8912BCF71B900B015F0 /* UIView+SnapKit.swift in Sources */,
 				3A91E8AD2BD4EF3600B015F0 /* AllPokemonListCell.swift in Sources */,
+				3A5E8B0C2CC4EAB3001E0906 /* HomePageCellModel.swift in Sources */,
 				3A91E8BF2BD9FDEA00B015F0 /* PokemonInfoPageViewController.swift in Sources */,
 				3A91E8B12BD8E21C00B015F0 /* PokemonInfoHTTPClient.swift in Sources */,
 				3AC145142CB6BAD600C0B49E /* PokemonInfoCell.swift in Sources */,

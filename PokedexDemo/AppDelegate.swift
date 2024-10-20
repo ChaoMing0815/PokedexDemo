@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let viewController = AllPokemonListViewController.init()
+        let viewController = HomePageViewController.init() /*AllPokemonListViewController.init()*/
         let navigationController = makeNavigationController(with: viewController)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
