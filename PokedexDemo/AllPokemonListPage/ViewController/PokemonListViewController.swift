@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class AllPokemonListViewController: UIViewController {
+class PokemonListViewController: UIViewController {
     // MARK: - stored properties
-    let viewModel = AllPokemonListViewModel()
+    let viewModel = PokemonListViewModel()
     lazy var pokemonListCollectionView = makeCollectionView()
     lazy var indicator = makeIndicatorView()
     
@@ -34,27 +34,27 @@ class AllPokemonListViewController: UIViewController {
 }
 
 // MARK: - AllPokemonListViewModelDelegate
-extension AllPokemonListViewController: AllPokemonListViewModelDelegate {
-    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, cellModelsDidUpdate cellModels: [AllPokemonListCellModel]) {
+extension PokemonListViewController: PokemonListViewModelDelegate {
+    func pokemonListViewModel(_ allPokemonListViewModel: PokemonListViewModel, cellModelsDidUpdate cellModels: [PokemonListCellModel]) {
         pokemonListCollectionView.reloadData()
         
     }
     
-    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, willLoadNewPokemonList: Bool) {
+    func pokemonListViewModel(_ allPokemonListViewModel: PokemonListViewModel, willLoadNewPokemonList: Bool) {
         indicator.startAnimating()
     }
     
-    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, didLoadNewPokemonList: Bool) {
+    func pokemonListViewModel(_ allPokemonListViewModel: PokemonListViewModel, didLoadNewPokemonList: Bool) {
         indicator.stopAnimating()
     }
     
-    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListErrorDidUpdate error: AllPokemonListServiceError) {
+    func pokemonListViewModel(_ allPokemonListViewModel: PokemonListViewModel, pokemonListErrorDidUpdate error: PokemonListServiceError) {
         
     }
 }
 
 // MARK: - Factory Methods
-extension AllPokemonListViewController {
+extension PokemonListViewController {
     func makeCollectionView() -> UICollectionView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumInteritemSpacing = 5
@@ -64,7 +64,7 @@ extension AllPokemonListViewController {
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(AllPokemonCollectionCell.self, forCellWithReuseIdentifier: String(describing: AllPokemonCollectionCell.self))
+        collectionView.register(PokemonCollectionCell.self, forCellWithReuseIdentifier: String(describing: PokemonCollectionCell.self))
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: UICollectionReusableView.self))
         return collectionView
     }
@@ -81,13 +81,13 @@ extension AllPokemonListViewController {
 }
 
 // MARK: - UICollectionViewDataSource
-extension AllPokemonListViewController: UICollectionViewDataSource {
+extension PokemonListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.cellModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: AllPokemonCollectionCell.self), for: indexPath) as! AllPokemonCollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PokemonCollectionCell.self), for: indexPath) as! PokemonCollectionCell
         let cellModel = viewModel.cellModels[indexPath.row]
         cell.configureCell(with: cellModel)
         return cell
@@ -117,7 +117,7 @@ extension AllPokemonListViewController: UICollectionViewDataSource {
 
 
 // MARK: - UICollectionViewDelegateFlowLayout
-extension AllPokemonListViewController: UICollectionViewDelegateFlowLayout {
+extension PokemonListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // 設定間隔以計算Cell寬度
         let spacing: CGFloat = 16
@@ -150,7 +150,7 @@ extension AllPokemonListViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - PokemonInfoPageViewControllerDataSource
-extension AllPokemonListViewController: PokemonInfoPageViewControllerDataSource {
+extension PokemonListViewController: PokemonInfoPageViewControllerDataSource {
     var SelectedPokemonID: String {
         guard let id = viewModel.pokemonIDForInfoPage else {
             fatalError("PokemonIDForInfoPage should not be nil!")

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AllPokemonListHTTPClient: HTTPClient {
+class PokemonListHTTPClient: HTTPClient {
     fileprivate var offset: Int = 0
     fileprivate let limit: Int
     
@@ -26,7 +26,7 @@ class AllPokemonListHTTPClient: HTTPClient {
     
 }
 
-extension AllPokemonListHTTPClient {
+extension PokemonListHTTPClient {
     // https://pokeapi.co/api/v2/pokemon?limit=1302
     var allPokemonListRequestType: RequestType {
         return RequestType.init(httpMethod: .GET, domainURL: .init(string: "https://pokeapi.co/api/v2")!, path: "/pokemon", queryItems: [.init(name: "limit", value: "\(limit)"), .init(name: "offset", value: "\(offset)")])

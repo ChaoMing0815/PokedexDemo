@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AllPokemonListCellModel {
+struct PokemonListCellModel {
     let id: String
     let name: String
     var imageData: Data?

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AllPokemonListCell: UITableViewCell {
+class PokemonListCell: UITableViewCell {
     
     lazy var pokemonNameCellBackground = makeCellBackgroundView()
     lazy var nameLabel = makeNameLabel()
@@ -23,7 +23,7 @@ class AllPokemonListCell: UITableViewCell {
     }
 }
 
-extension AllPokemonListCell {
+extension PokemonListCell {
     fileprivate func setupLayout() {
         contentView.addSubview(pokemonNameCellBackground)
         pokemonNameCellBackground.addSubview(nameLabel)
@@ -42,8 +42,8 @@ extension AllPokemonListCell {
     }
 }
 
-extension AllPokemonListCell {
-    func configureCell(with cellModel: AllPokemonListCellModel) {
+extension PokemonListCell {
+    func configureCell(with cellModel: PokemonListCellModel) {
         nameLabel.text = cellModel.name
     }
 }

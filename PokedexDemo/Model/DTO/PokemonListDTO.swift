@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AllPokemonListDTO: Codable {
+struct PokemonListDTO: Codable {
     struct Result: Codable {
         let name: String
         let url: String

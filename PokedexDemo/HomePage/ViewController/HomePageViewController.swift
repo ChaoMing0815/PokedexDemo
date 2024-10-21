@@ -71,7 +71,7 @@ extension HomePageViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension HomePageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let destinationViewController = AllPokemonListViewController()
+        let destinationViewController = PokemonListViewController()
         navigationController?.pushViewController(destinationViewController, animated: true)
     }
 }

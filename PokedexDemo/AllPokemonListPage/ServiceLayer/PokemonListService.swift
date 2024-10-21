@@ -6,16 +6,16 @@
 //
 
 import Foundation
-enum AllPokemonListServiceError: Error {
+enum PokemonListServiceError: Error {
     case JSONParsingError
     case NetworkError
 }
 
-class AllPokemonListService {
-    let client = AllPokemonListHTTPClient()
+class PokemonListService {
+    let client = PokemonListHTTPClient()
     let infoClient = PokemonInfoHTTPClient()
     
-    func loadAllPokemonList(completion: @escaping (Result<AllPokemonList, AllPokemonListServiceError>) -> Void) {
+    func loadPokemonList(completion: @escaping (Result<PokemonList, PokemonListServiceError>) -> Void) {
         client.requestAllPokemonList { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
@@ -23,8 +23,8 @@ class AllPokemonListService {
                 case let .success((data, _)): // tuple (Data, HTTPURLResponse) -> type
                     // do success behavior
                     do {
-                        let allPokemonListDTO = try JSONDecoder().decode(AllPokemonListDTO.self, from: data)
-                        let allPokemonList = AllPokemonList(from: allPokemonListDTO)
+                        let allPokemonListDTO = try JSONDecoder().decode(PokemonListDTO.self, from: data)
+                        let allPokemonList = PokemonList(from: allPokemonListDTO)
                         completion(.success(allPokemonList))
                         self.client.updateOffset()
                     } catch {

@@ -12,9 +12,9 @@ struct SinglePokemonInfo {
     let id: String
 }
 
-struct AllPokemonList {
-    var allPokemonInfos: [SinglePokemonInfo] {
-        allPokemonLitsDTO.results.compactMap {
+struct PokemonList {
+    var pokemonInfos: [SinglePokemonInfo] {
+        pokemonLitsDTO.results.compactMap {
             if let id = self.extractLastNumber(from: $0.url) {
                 return SinglePokemonInfo.init(name: $0.name, id: id)
             }
@@ -22,10 +22,10 @@ struct AllPokemonList {
         }
     }
     
-    private let allPokemonLitsDTO: AllPokemonListDTO
+    private let pokemonLitsDTO: PokemonListDTO
     
-    init(from dto: AllPokemonListDTO) {
-        allPokemonLitsDTO = dto
+    init(from dto: PokemonListDTO) {
+        pokemonLitsDTO = dto
     }
     
     private func extractLastNumber(from url: String) -> String? {

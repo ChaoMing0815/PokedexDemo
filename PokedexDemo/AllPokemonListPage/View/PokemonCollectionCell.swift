@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class AllPokemonCollectionCell: UICollectionViewCell {
+class PokemonCollectionCell: UICollectionViewCell {
     lazy var nameLabel = makeNameLabel()
     lazy var pokemonImageView = makeImageView()
     lazy var bgView = makeBackgroundView()
@@ -29,8 +29,8 @@ class AllPokemonCollectionCell: UICollectionViewCell {
 }
 
 // MARK: - Internal Methods
-extension AllPokemonCollectionCell {
-    func configureCell(with cellModel: AllPokemonListCellModel) {
+extension PokemonCollectionCell {
+    func configureCell(with cellModel: PokemonListCellModel) {
         nameLabel.text = cellModel.name
         nameLabel.text = nameLabel.text?.capitalized
         if let imageData = cellModel.imageData {
@@ -44,7 +44,7 @@ extension AllPokemonCollectionCell {
     }
 }
 // MARK: - Layout
-extension AllPokemonCollectionCell {
+extension PokemonCollectionCell {
     fileprivate func setupLayout() {
         [bgView, nameLabel, pokemonImageView].forEach { contentView.addSubview($0) }
         bgView.fillWithPadding(with: .init(top: 16, left: 16, bottom: 0, right: 16))
@@ -54,7 +54,7 @@ extension AllPokemonCollectionCell {
 }
 
 // MARK: - Factory Methods
-extension AllPokemonCollectionCell {
+extension PokemonCollectionCell {
     fileprivate func makeNameLabel() -> UILabel {
         let nameLabel = UILabel()
         nameLabel.numberOfLines = 2

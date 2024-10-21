@@ -7,19 +7,19 @@
 
 import Foundation
 
-protocol AllPokemonListViewModelDelegate: AnyObject {
-    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, cellModelsDidUpdate cellModels: [AllPokemonListCellModel])
-    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, allPokemonListErrorDidUpdate error: AllPokemonListServiceError)
-    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, willLoadNewPokemonList: Bool)
-    func allPokemonListViewModel(_ allPokemonListViewModel: AllPokemonListViewModel, didLoadNewPokemonList: Bool)
+protocol PokemonListViewModelDelegate: AnyObject {
+    func pokemonListViewModel(_ pokemonListViewModel: PokemonListViewModel, cellModelsDidUpdate cellModels: [PokemonListCellModel])
+    func pokemonListViewModel(_ pokemonListViewModel: PokemonListViewModel, pokemonListErrorDidUpdate error: PokemonListServiceError)
+    func pokemonListViewModel(_ pokemonListViewModel: PokemonListViewModel, willLoadNewPokemonList: Bool)
+    func pokemonListViewModel(_ pokemonListViewModel: PokemonListViewModel, didLoadNewPokemonList: Bool)
 }
 
 // MARK: - Internal Methods and Network Service
-class AllPokemonListViewModel {
-    weak var delegate: AllPokemonListViewModelDelegate?
+class PokemonListViewModel {
+    weak var delegate: PokemonListViewModelDelegate?
     
-    let service = AllPokemonListService()
-    var cellModels = [AllPokemonListCellModel]()
+    let service = PokemonListService()
+    var cellModels = [PokemonListCellModel]()
     var pokemonIDForInfoPage: String?
     var isLoadingAndPresentingNewPokemonList = false
     
@@ -27,9 +27,9 @@ class AllPokemonListViewModel {
         if isLoadingAndPresentingNewPokemonList {
             return
         }
-        delegate?.allPokemonListViewModel(self, willLoadNewPokemonList: true)
+        delegate?.pokemonListViewModel(self, willLoadNewPokemonList: true)
         isLoadingAndPresentingNewPokemonList = true
-        service.loadAllPokemonList { [weak self] result in
+        service.loadPokemonList { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(allPokemonList):
@@ -41,7 +41,7 @@ class AllPokemonListViewModel {
                         defer { group.leave() }
                         switch result {
                         case let .success(imageData):
-                            let cellModel = AllPokemonListCellModel(id: pokemonInfo.id, name: pokemonInfo.name, imageData: imageData)
+                            let cellModel = PokemonListCellModel(id: pokemonInfo.id, name: pokemonInfo.name, imageData: imageData)
                             self.cellModels.append(cellModel)
                         case .failure(_):
                             print("Fail to load image data for \(pokemonInfo.id)")
@@ -49,14 +49,14 @@ class AllPokemonListViewModel {
                     }
                 }
                 group.notify(queue: .main) {
-                    self.delegate?.allPokemonListViewModel(self, didLoadNewPokemonList: true)
+                    self.delegate?.pokemonListViewModel(self, didLoadNewPokemonList: true)
                     self.isLoadingAndPresentingNewPokemonList = false
                     self.cellModels.sort(by: { Int($0.id)! < Int($1.id)! })
-                    self.delegate?.allPokemonListViewModel(self, cellModelsDidUpdate: self.cellModels)
+                    self.delegate?.pokemonListViewModel(self, cellModelsDidUpdate: self.cellModels)
                 }
             case let .failure(error):
                 self.isLoadingAndPresentingNewPokemonList = false
-                self.delegate?.allPokemonListViewModel(self, allPokemonListErrorDidUpdate: error)
+                self.delegate?.pokemonListViewModel(self, pokemonListErrorDidUpdate: error)
             }
         }
     }
@@ -68,7 +68,7 @@ class AllPokemonListViewModel {
 }
 
 
-extension AllPokemonListViewModel {
+extension PokemonListViewModel {
     func loadNewPokemons(withIndexPath indexPath: IndexPath, lastSectionIndex: Int, lastItemIndex: Int) {
         if indexPath.section == lastSectionIndex && indexPath.item == lastItemIndex {
             if !self.isLoadingAndPresentingNewPokemonList {
