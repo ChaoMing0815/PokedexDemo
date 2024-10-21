@@ -192,6 +192,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		3A5E8B122CC5F843001E0906 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3AC145132CB6BAD600C0B49E /* PokemonInfoCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		3A91E84F2BCF64E600B015F0 = {
 			isa = PBXGroup;
 			children = (
@@ -329,11 +337,11 @@
 		3A91E8AE2BD8E1AB00B015F0 /* PokemonInfoPage */ = {
 			isa = PBXGroup;
 			children = (
+				3A5E8B122CC5F843001E0906 /* View */,
 				3A91E8BD2BD9FDB600B015F0 /* ViewController */,
 				3A91E8BA2BD9F42400B015F0 /* ViewModel */,
 				3A91E8B52BD9EB6D00B015F0 /* CellModel */,
 				3A91E8B42BD9EB6200B015F0 /* ServiceLayer */,
-				3AC145132CB6BAD600C0B49E /* PokemonInfoCell.swift */,
 			);
 			path = PokemonInfoPage;
 			sourceTree = "<group>";
