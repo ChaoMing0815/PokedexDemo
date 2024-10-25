@@ -71,8 +71,14 @@ extension HomePageViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension HomePageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let destinationViewController = PokemonListViewController()
-        navigationController?.pushViewController(destinationViewController, animated: true)
+        // 確保選取的cell正確對應不同的世代，再依據世代資料獲取寶可夢資訊
+        let selectedGeneration = indexPath.row
+        if selectedGeneration < 10 {
+            let destinationViewController = PokemonListViewController()
+            destinationViewController.selectedGernerationInt = selectedGeneration + 1
+            navigationController?.pushViewController(destinationViewController, animated: true)
+        }
+        
     }
 }
 

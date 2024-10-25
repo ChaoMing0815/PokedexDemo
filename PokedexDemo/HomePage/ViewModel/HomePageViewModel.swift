@@ -22,7 +22,3 @@ class HomePageViewModel {
         HomePageCellModel.init(iconName: "pokeball", labelText: "My Favorite Pokemons")
     ]
 }
-
-extension HomePageViewModel {
-   
-}

@@ -11,8 +11,10 @@ import UIKit
 class PokemonListViewController: UIViewController {
     // MARK: - stored properties
     let viewModel = PokemonListViewModel()
+    
     lazy var pokemonListCollectionView = makeCollectionView()
     lazy var indicator = makeIndicatorView()
+    var selectedGernerationInt: Int?
     
     
     override func viewDidLoad() {
@@ -24,7 +26,10 @@ class PokemonListViewController: UIViewController {
         pokemonListCollectionView.constraint(top: view.safeAreaLayoutGuide.snp.top, bottom: view.safeAreaLayoutGuide.snp.bottom, left: view.snp.left, right: view.snp.right)
 
         viewModel.delegate = self
-        viewModel.loadAllPokemonListAndImage()
+        
+        guard let gernerationInt = selectedGernerationInt else { return }
+        viewModel.setSelectedGeneration(with: gernerationInt)
+        viewModel.loadPokemonListAndImage()
     }
     
     func makeIndicatorView() -> UIActivityIndicatorView {
@@ -33,22 +38,22 @@ class PokemonListViewController: UIViewController {
     }
 }
 
-// MARK: - AllPokemonListViewModelDelegate
+// MARK: - PokemonListViewModelDelegate
 extension PokemonListViewController: PokemonListViewModelDelegate {
-    func pokemonListViewModel(_ allPokemonListViewModel: PokemonListViewModel, cellModelsDidUpdate cellModels: [PokemonListCellModel]) {
+    func pokemonListViewModel(_ pokemonListViewModel: PokemonListViewModel, cellModelsDidUpdate cellModels: [PokemonListCellModel]) {
         pokemonListCollectionView.reloadData()
         
     }
     
-    func pokemonListViewModel(_ allPokemonListViewModel: PokemonListViewModel, willLoadNewPokemonList: Bool) {
+    func pokemonListViewModel(_ pokemonListViewModel: PokemonListViewModel, willLoadNewPokemonList: Bool) {
         indicator.startAnimating()
     }
     
-    func pokemonListViewModel(_ allPokemonListViewModel: PokemonListViewModel, didLoadNewPokemonList: Bool) {
+    func pokemonListViewModel(_ pokemonListViewModel: PokemonListViewModel, didLoadNewPokemonList: Bool) {
         indicator.stopAnimating()
     }
     
-    func pokemonListViewModel(_ allPokemonListViewModel: PokemonListViewModel, pokemonListErrorDidUpdate error: PokemonListServiceError) {
+    func pokemonListViewModel(_ pokemonListViewModel: PokemonListViewModel, pokemonListErrorDidUpdate error: PokemonListUseCaseError) {
         
     }
 }
