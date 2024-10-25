@@ -79,6 +79,7 @@
 		3A91E8902BCF71B900B015F0 /* UIView+SnapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SnapKit.swift"; sourceTree = "<group>"; };
 		3A91E8952BCF779000B015F0 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		3A91E8982BCF78D700B015F0 /* AllPokemonListHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonListHTTPClient.swift; sourceTree = "<group>"; };
+		3A91E8982BCF78D700B015F0 /* PokemonListHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListHTTPClient.swift; sourceTree = "<group>"; };
 		3A91E89E2BCFA11300B015F0 /* PokemonInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoDTO.swift; sourceTree = "<group>"; };
 		3A91E8A02BCFA16E00B015F0 /* AllPokemonListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonListDTO.swift; sourceTree = "<group>"; };
 		3A91E8A22BCFA3AC00B015F0 /* AllPokemonListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPokemonListService.swift; sourceTree = "<group>"; };
