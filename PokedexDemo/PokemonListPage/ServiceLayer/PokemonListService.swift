@@ -12,21 +12,29 @@ enum PokemonListServiceError: Error {
 }
 
 class PokemonListService {
-    let client = PokemonListHTTPClient()
+    fileprivate let startID: Int
+    fileprivate let endID: Int
+    fileprivate let listClient: PokemonListHTTPClient!
+    
+    init(startID: Int, endID: Int) {
+        self.startID = startID
+        self.endID = endID
+        self.listClient = PokemonListHTTPClient(startID: self.startID, endID: self.endID)
+    }
+    
     let infoClient = PokemonInfoHTTPClient()
     
-    func loadPokemonList(completion: @escaping (Result<PokemonList, PokemonListServiceError>) -> Void) {
-        client.requestAllPokemonList { [weak self] result in
+    func loadPokemonList(completion: @escaping (Result<PokemonListDTO, PokemonListServiceError>) -> Void) {
+        listClient.requestPokemonList { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case let .success((data, _)): // tuple (Data, HTTPURLResponse) -> type
                     // do success behavior
                     do {
-                        let allPokemonListDTO = try JSONDecoder().decode(PokemonListDTO.self, from: data)
-                        let allPokemonList = PokemonList(from: allPokemonListDTO)
-                        completion(.success(allPokemonList))
-                        self.client.updateOffset()
+                        let pokemonListDTO = try JSONDecoder().decode(PokemonListDTO.self, from: data)
+                        completion(.success(pokemonListDTO))
+                        self.listClient.updateOffset()
                     } catch {
                         completion(.failure(.JSONParsingError))
                     }
@@ -38,7 +46,7 @@ class PokemonListService {
         }
     }
     
-    func loadPokemonImage(with id: String, completion: @escaping (Result<Data, HTTPClientError>) -> Void) {
+    func loadPokemonImage(with id: String, completion: @escaping (Result<Data, PokemonListServiceError>) -> Void) {
         infoClient.requestPokemonImage(with: id) { result in
             DispatchQueue.main.async {
                 switch result {
