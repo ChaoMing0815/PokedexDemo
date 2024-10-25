@@ -10,25 +10,24 @@ import Foundation
 struct SinglePokemonInfo {
     let name: String
     let id: String
+    var imageData: Data?
 }
 
 struct PokemonList {
-    var pokemonInfos: [SinglePokemonInfo] {
-        pokemonLitsDTO.results.compactMap {
-            if let id = self.extractLastNumber(from: $0.url) {
+    var pokemonInfos: [SinglePokemonInfo]
+    private let pokemonLitsDTO: PokemonListDTO
+    
+    init(from dto: PokemonListDTO) {
+        pokemonLitsDTO = dto
+        self.pokemonInfos = dto.results.compactMap {
+            if let id = PokemonList.extractLastNumber(from: $0.url) {
                 return SinglePokemonInfo.init(name: $0.name, id: id)
             }
             return nil
         }
     }
     
-    private let pokemonLitsDTO: PokemonListDTO
-    
-    init(from dto: PokemonListDTO) {
-        pokemonLitsDTO = dto
-    }
-    
-    private func extractLastNumber(from url: String) -> String? {
+    private static func extractLastNumber(from url: String) -> String? {
         guard let url = URL(string: url) else {
             print("Invalid URL")
             return nil
