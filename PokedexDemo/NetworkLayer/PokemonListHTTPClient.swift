@@ -12,12 +12,14 @@ class PokemonListHTTPClient: HTTPClient {
     fileprivate let limit: Int
     fileprivate let startID: Int
     fileprivate let endID: Int
+    fileprivate var adjustedLimit: Int
     
     init(limit: Int = 30, startID: Int, endID: Int) {
         self.limit = limit
         self.startID = startID
         self.endID = endID
         self.offset = startID - 1
+        self.adjustedLimit = limit
         super.init()
     }
     
@@ -26,10 +28,13 @@ class PokemonListHTTPClient: HTTPClient {
     }
     
     func updateOffset() {
-        offset += limit
-        if offset > endID {
-            offset = endID
-        }
+        // 設置尚未載入的剩餘寶可夢數量，以判定接近最後一隻寶可夢時，QueryItem的limit限制
+        let remainUnloadCount = endID - offset
+        self.adjustedLimit = min(limit, remainUnloadCount)
+        // 如果剩餘數量仍大於每次設定的載入數量limit，則可以繼續以相同限制數量進行加載
+        if limit < remainUnloadCount {
+            offset += limit
+        } else { return }
     }
     
 }
@@ -37,6 +42,6 @@ class PokemonListHTTPClient: HTTPClient {
 extension PokemonListHTTPClient {
     // https://pokeapi.co/api/v2/pokemon?limit=1302
     var pokemonListRequestType: RequestType {
-        return RequestType.init(httpMethod: .GET, domainURL: .init(string: "https://pokeapi.co/api/v2")!, path: "/pokemon", queryItems: [.init(name: "limit", value: "\(limit)"), .init(name: "offset", value: "\(offset)")])
+        return RequestType.init(httpMethod: .GET, domainURL: .init(string: "https://pokeapi.co/api/v2")!, path: "/pokemon", queryItems: [.init(name: "limit", value: "\(adjustedLimit)"), .init(name: "offset", value: "\(offset)")])
     }
 }
