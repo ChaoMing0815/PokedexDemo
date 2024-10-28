@@ -36,7 +36,7 @@ class PokemonListUseCase: PokemonListUseCaseProtocol {
                 
                 for index in pokemonList.pokemonInfos.indices {
                     group.enter()
-                    var pokemonInfo = pokemonList.pokemonInfos[index]
+                    let pokemonInfo = pokemonList.pokemonInfos[index]
                     self.service.loadPokemonImage(with: pokemonInfo.id) { result in
                         defer { group.leave() }
                         switch result {
