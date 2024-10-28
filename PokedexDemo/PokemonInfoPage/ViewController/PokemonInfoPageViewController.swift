@@ -75,9 +75,9 @@ extension PokemonInfoPageViewController {
         // 首先確保DataSource資料
         guard let idString = dataSource?.SelectedPokemonID else { fatalError("Must conform PokemonInfoPageViewControllerDataSource!") }
         guard let id = Int(idString) else { fatalError("SeletedPokemonID should not be nil!") }
-        let start = max(0, id - 9)
-        let end = id + 9
-        let idsToLoad: [String] = (start...end).map { "\($0)"}
+//        let start = max(0, id - 9)
+//        let end = id + 9
+        let idsToLoad: [String] = [idString] /*(start...end).map { "\($0)"}*/
         
         if let index = idsToLoad.firstIndex(of: idString) {
             self.selectedPokemonIndex = index
