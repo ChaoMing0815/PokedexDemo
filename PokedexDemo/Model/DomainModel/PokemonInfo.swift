@@ -15,6 +15,7 @@ struct PokemonInfo {
     let stats: [PokemonStat]
     let types: [String]
     var imageData: Data?
+    var shinyImageData: Data?
     
     init(from dto: PokemonInfoDTO) {
         id = dto.id
