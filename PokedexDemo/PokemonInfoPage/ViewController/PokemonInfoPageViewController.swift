@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// MARK: - Set protocol 'PokemonInfoPageViewControllerDataSource'
 protocol PokemonInfoPageViewControllerDataSource: AnyObject {
     var SelectedPokemonID: String { get }
 }
@@ -26,9 +27,12 @@ class PokemonInfoPageViewController: UIViewController {
     
     let viewModel = PokemonInfoViewModel()
     lazy var pokemonInfoCollectionView = makeCollectionView()
+    let shinyIcon = UIImage(named: "shiny")!.withRenderingMode(.alwaysOriginal)
+    let filledShinyIcon = UIImage(named: "shinyTapped")!.withRenderingMode(.alwaysOriginal)
+    lazy var shinyButton = makeButton(with: shinyIcon, tappedIcon: filledShinyIcon)
     
     var selectedPokemonIndex: Int?
-    
+    var isShinyEnabled = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,7 @@ class PokemonInfoPageViewController: UIViewController {
         view.layer.insertSublayer(makeGradientLayer(), at: 0)
         viewModel.delegate = self
         setupIDsToLoadPokemonInfoAndImage()
+        shinyButton.addTarget(self, action: #selector(shinyButtonTapped(_:)), for: .touchUpInside)
         
     }
 }
@@ -49,11 +54,10 @@ extension PokemonInfoPageViewController: PokemonInfoViewModelDelegate {
             let indexPath = IndexPath(item: selectedPokemonIndex, section: 0)
             pokemonInfoCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         }
-        
     }
     
     func pokemonInfoViewModel(_ pokemonInfoViewModel: PokemonInfoViewModel, pokemonInfoErrorDidUpdate serviceError: PokemonInfoServiceError) {
-            // TODO: Error handling
+        // TODO: Error handling
     }
     
     
@@ -63,26 +67,10 @@ extension PokemonInfoPageViewController: PokemonInfoViewModelDelegate {
 extension PokemonInfoPageViewController {
     func setupLayout() {
         self.view.addSubview(pokemonInfoCollectionView)
+        self.view.addSubview(shinyButton)
         
         pokemonInfoCollectionView.constraint(top: view.safeAreaLayoutGuide.snp.top, bottom: view.safeAreaLayoutGuide.snp.bottom, left: view.snp.left, right: view.snp.right)
-    }
-}
-
-// MARK: - Heplers
-extension PokemonInfoPageViewController {
-    // 設定進入PokemonInfoPage後需要存取的其他寶可夢資料陣列，並設定被選取Pokemon的IndexPath，以利進入畫面後設定顯示該PokemonInfoCell
-    func setupIDsToLoadPokemonInfoAndImage() {
-        // 首先確保DataSource資料
-        guard let idString = dataSource?.SelectedPokemonID else { fatalError("Must conform PokemonInfoPageViewControllerDataSource!") }
-        guard let id = Int(idString) else { fatalError("SeletedPokemonID should not be nil!") }
-//        let start = max(0, id - 9)
-//        let end = id + 9
-        let idsToLoad: [String] = [idString] /*(start...end).map { "\($0)"}*/
-        
-        if let index = idsToLoad.firstIndex(of: idString) {
-            self.selectedPokemonIndex = index
-        }
-        viewModel.loadPokemonInfoAndImage(with: idsToLoad)
+        shinyButton.constraint(top: view.safeAreaLayoutGuide.snp.top, right: view.snp.right, padding: .init(top: 16, left: 0, bottom: 0, right: 16), size: .init(width: 48, height: 48))
     }
 }
 
@@ -106,6 +94,18 @@ extension PokemonInfoPageViewController {
         view.font = .boldSystemFont(ofSize: 22)
         view.textColor = .white
         return view
+    }
+    
+    func makeButton(with icon: UIImage, tappedIcon: UIImage) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(icon, for: .normal)
+        button.setImage(tappedIcon, for: .selected)
+        button.layer.borderWidth = 0 // 設置空心邊框寬度
+        button.backgroundColor = .clear // 初始設置為透明
+        button.adjustsImageWhenHighlighted = false // 禁用高亮顯示
+        button.adjustsImageWhenDisabled = false
+        button.tintColor = .clear
+        return button
     }
     
     func makeCollectionView() -> UICollectionView {
@@ -135,6 +135,50 @@ extension PokemonInfoPageViewController {
     }
 }
 
+// MARK: - Heplers
+private extension PokemonInfoPageViewController {
+    // 設定進入PokemonInfoPage後需要存取的其他寶可夢資料陣列，並設定被選取Pokemon的IndexPath，以利進入畫面後設定顯示該PokemonInfoCell
+    func setupIDsToLoadPokemonInfoAndImage() {
+        // 首先確保DataSource資料
+        guard let idString = dataSource?.SelectedPokemonID else { fatalError("Must conform PokemonInfoPageViewControllerDataSource!") }
+        //        guard let id = Int(idString) else { fatalError("SeletedPokemonID should not be nil!") }
+        //        let start = max(0, id - 9)
+        //        let end = id + 9
+        let idsToLoad: [String] = [idString] /*(start...end).map { "\($0)"}*/
+        
+        if let index = idsToLoad.firstIndex(of: idString) {
+            self.selectedPokemonIndex = index
+        }
+        viewModel.loadPokemonInfoAndImage(with: idsToLoad)
+    }
+    
+    func updateCellsForShinyState() {
+        for cell in pokemonInfoCollectionView.visibleCells {
+            if let pokemonCell = cell as? PokemonInfoCell,
+               // 透過UICollectionViewCell在CollectionView中的IndexPath指定其cellModel
+               let indexPath = pokemonInfoCollectionView.indexPath(for: pokemonCell) {
+                pokemonCell.updateImage(with: viewModel.cellModels[indexPath.row], isShinyEnabled: isShinyEnabled)
+            }
+        }
+    }
+    
+    @objc private func toggleShiny() {
+        isShinyEnabled.toggle()
+        updateCellsForShinyState()
+    }
+    
+    // 設置shinyButton點擊後的效果與功能
+    @objc private func shinyButtonTapped(_ sender: UIButton) {
+        UIView.performWithoutAnimation {
+            // 設置點擊後改變為'isSelected'狀態
+            sender.isSelected.toggle()
+            sender.layoutIfNeeded()
+        }
+        // 執行的shinyButton的功能
+        toggleShiny()
+    }
+}
+
 // MARK: - UICollectionViewDataSource
 extension PokemonInfoPageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -148,8 +192,6 @@ extension PokemonInfoPageViewController: UICollectionViewDataSource {
         cell.backgroundColor = .clear
         return cell
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDelegate
@@ -185,11 +227,11 @@ extension PokemonInfoPageViewController: UICollectionViewDelegateFlowLayout {
 //            for cell in pokemonInfoCollectionView.visibleCells {
 //                let basePosition = pokemonInfoCollectionView.convert(cell.center, to: pokemonInfoCollectionView.superview)
 //                let distance = abs(basePosition.x - centerX)
-//                
+//
 //                // 設置縮放比例，距離中心越遠，縮放越小
 //                let scale = max(0.75, 1 - distance / (scrollView.frame.size.width))
 //                cell.transform = CGAffineTransform(scaleX: scale, y: scale)
-//                
+//
 //                // 設置透明度，距離中心越遠，透明度越高
 //                let alpha = max(0.5, 1 - distance / (scrollView.frame.size.width * 0.5))
 //                cell.alpha = alpha
