@@ -15,6 +15,7 @@ class PokemonListViewController: UIViewController {
     lazy var pokemonListCollectionView = makeCollectionView()
     lazy var indicator = makeIndicatorView()
     var selectedGernerationInt: Int?
+    private var hasReachedScrollViewBottom = false
     
     
     override func viewDidLoad() {
@@ -54,7 +55,7 @@ extension PokemonListViewController: PokemonListViewModelDelegate {
     }
     
     func pokemonListViewModel(_ pokemonListViewModel: PokemonListViewModel, pokemonListErrorDidUpdate error: PokemonListUseCaseError) {
-        
+        // TODO: Error handling
     }
 }
 
@@ -154,12 +155,39 @@ extension PokemonListViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - PokemonInfoPageViewControllerDataSource
+// MARK: - UICollectionViewDelegate
+extension PokemonListViewController: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // 檢測是否到達底部
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+        
+        // 當滾動到底部時，設置 hasReachedBottom 標記
+        if offsetY >= contentHeight - frameHeight {
+            self.hasReachedScrollViewBottom = true
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        // 當再次滑動時，如果已到達底部則顯示提示
+        if self.hasReachedScrollViewBottom {
+            if viewModel.isLastPageLoaded {
+                let alert = UIAlertController(title: "Hint", message: "Last pokemon of current generation has been loaded!!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true, completion: nil)
+            }
+            self.hasReachedScrollViewBottom = false // 重置標記
+        }
+    }
+}
+    
+    // MARK: - PokemonInfoPageViewControllerDataSource
 extension PokemonListViewController: PokemonInfoPageViewControllerDataSource {
     var SelectedPokemonID: String {
         guard let id = viewModel.pokemonIDForInfoPage else {
             fatalError("PokemonIDForInfoPage should not be nil!")
         }
         return id
-    }    
+    }
 }
