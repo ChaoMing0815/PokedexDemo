@@ -14,4 +14,8 @@ struct PokemonInfoCellModel {
     let weight: Int
     let types: [String]
     var imageData: Data?
+    var shinyImageData :Data?
+    var typeIcon1Name: String?
+    var typeIcon2Name: String?
+    
 }
