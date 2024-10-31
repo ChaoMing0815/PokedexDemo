@@ -127,7 +127,7 @@ extension PokemonInfoPageViewController {
     func makeGradientLayer() -> CAGradientLayer {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
-        gradientLayer.colors = [UIColor.black.cgColor, UIColor.blue.cgColor] // 定義漸層顏色
+        gradientLayer.colors = [UIColor.systemIndigo.cgColor, UIColor.systemGray2.cgColor] // 定義漸層顏色
         gradientLayer.locations = [0.4, 1.0] //設置顏色過渡點，表示第一個顏色佔比60%
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0) // 漸層的起點
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1) // 漸層的終點
