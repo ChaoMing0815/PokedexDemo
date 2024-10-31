@@ -17,6 +17,11 @@ class PokemonInfoHTTPClient: HTTPClient {
         let requestType = makePokemonImageRequest(with: id)
         request(with: requestType, completion: completion)
     }
+    
+    func requestShinyPokemonImage(with id: String, completion: @escaping (Result<(Data, HTTPURLResponse), HTTPClientError>) -> Void) {
+        let requestType = makePokemonShinyImageRequest(with: id)
+        request(with: requestType, completion: completion)
+    }
 }
 
 fileprivate extension PokemonInfoHTTPClient {
