@@ -61,6 +61,21 @@ extension PokemonInfoCell {
         
         setTypeIcon(with: cellModel)
     }
+    
+    func updateImage(with cellModel: PokemonInfoCellModel, isShinyEnabled: Bool) {
+        if isShinyEnabled {
+            if let shinyImageData = cellModel.shinyImageData {
+                let shinyImage = UIImage(data: shinyImageData)
+                // 加入動畫轉換效果
+                UIView.transition(with: pokemonImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: { self.pokemonImageView.image = shinyImage })
+            }
+        } else {
+            if let imageData = cellModel.imageData {
+                let image = UIImage(data: imageData)
+                UIView.transition(with: pokemonImageView, duration: 0.3, options: .transitionFlipFromLeft, animations: { self.pokemonImageView.image = image })
+            }
+        }
+    }
 }
 
 // MARK: - Layout

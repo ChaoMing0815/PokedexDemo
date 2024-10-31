@@ -32,7 +32,7 @@ class PokemonInfoViewModel {
                 
                 switch result {
                 case let .success(pokemonInfo):
-                    let cellModel = PokemonInfoCellModel(id: pokemonInfo.id, name: pokemonInfo.name, height: pokemonInfo.height, weight: pokemonInfo.weight, types: pokemonInfo.types, imageData: pokemonInfo.imageData)
+                    let cellModel = PokemonInfoCellModel(id: pokemonInfo.id, name: pokemonInfo.name, height: pokemonInfo.height, weight: pokemonInfo.weight, types: pokemonInfo.types, imageData: pokemonInfo.imageData, shinyImageData: pokemonInfo.shinyImageData)
                     loadedCellModels.append(cellModel)
                 case let .failure(error):
                     self.delegate?.pokemonInfoViewModel(self, pokemonInfoErrorDidUpdate: error)
