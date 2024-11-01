@@ -42,8 +42,8 @@
 <br> 
   下載或複製這個 repository：<br> 
 
-```
-bash
+```bash
+
 複製程式碼
 git clone https://github.com/yourusername/Pokedex.git
 cd Pokedex
