@@ -1,5 +1,15 @@
 # PokeDexDemo App
 
+## Table of Contents
+- [App Preview](#app-preview)<br>  
+- [Introduction](#introduction)<br>
+- [Features](#features)<br>
+- [Technologies](#technologies)<br>
+- [Setup](#setup)<br>
+- [Usage](#usage)<br>
+- [Contributing](#contributing)<br>
+- [License](#license)<br>
+
 ## App preview
 <table>
   <tr>
@@ -69,7 +79,6 @@ git clone https://github.com/yourusername/Pokedex.git
 cd Pokedex
 
 ```
-
 使用 Swift Package Manager 安裝依賴項： 在 Xcode 中，選擇 File > Swift Packages > Resolve Package Versions。<br> 
 配置 API 密鑰： 本專案使用公開 API，因此不需要特殊的 API 密鑰配置。直接運行即可。<br> 
 
