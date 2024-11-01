@@ -33,11 +33,14 @@
 ## Setup
 **環境需求**
 <br> 
+<br> 
   Xcode 12.0 或以上版本<br> 
   iOS 14.0 或以上版本<br> 
   <br> 
 **安裝步驟**
-下載或複製這個 repository：<br> 
+<br> 
+<br> 
+  下載或複製這個 repository：<br> 
 
 ```
 bash
