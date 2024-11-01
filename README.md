@@ -9,24 +9,32 @@
 -**寶可夢列表瀏覽**：<br> 
   按世代篩選載入寶可夢列表，方便查找不同世代寶可夢。<br> 
   寶可夢列表頁面支持分頁加載，避免單次發送大量網路請求導致程式卡頓，優化使用者體驗。<br> 
+  <br> 
 -**寶可夢個別資訊展示**：<br> 
   從列表頁點擊有興趣的寶可夢，進入個別資訊頁面顯示該寶可夢的屬性、身高、體重等資訊。<br> 
   個別展示頁面會根據寶可夢屬性呈現背景顏色。<br> 
+  <br> 
 -**Shiny 切換**：<br> 
   在個別展示頁面可以使用 Shiny 按鍵自由切換顯示每隻寶可夢的 Shiny 或一般版本圖片。<br> 
   點擊按鈕切換時增加圖片轉換的動畫效果，增加用戶互動性。<br> 
 
 ## Technologies
 -**Swift**：使用 Swift 語言進行 iOS 應用開發。<br> 
+<br> 
 -**UIKit**：使用 UIKit 框架構建簡單直觀的用戶界面，並自定義各種 Factory Method 創建 UI 元件。<br> 
+<br> 
 -**API數據整合**：自公開的 [PokéAPI](https://pokeapi.co/)獲取最新寶可夢資料與圖片，並將其資料結構解析轉化為 Domain Model 於應用程式中使用。<br> 
+<br> 
 -**RESTFul 網路層架構**：自定義的 RESTFul 網路層架構，可針對不同的網路請求進行調整。<br> 
+<br> 
 -**SnapKit**：基於 SnapKit 的 UI 佈局的框架，可根據資料自動進行佈局調整，簡化視圖的約束設定。<br> 
 
 ## Setup
 **環境需求**
+<br> 
   Xcode 12.0 或以上版本<br> 
   iOS 14.0 或以上版本<br> 
+  <br> 
 **安裝步驟**
 下載或複製這個 repository：<br> 
 
@@ -63,5 +71,5 @@ git checkout -b feature/新功能名稱
 發送 Pull Request。
 
 ## License
-該專案在 MIT 許可下發布，有關詳細信息，請參閱 [LICENSE](./LICENSE) 文件。
+該專案在 MIT 許可下發布，有關詳細信息，請參閱 [LICENSE](./LICENSE.md) 文件。
 
