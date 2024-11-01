@@ -1,15 +1,5 @@
 # PokeDexDemo App
 
-## Table of Contents
-- [App Preview](#app-preview)<br>  
-- [Introduction](#introduction)<br>
-- [Features](#features)<br>
-- [Technologies](#technologies)<br>
-- [Setup](#setup)<br>
-- [Usage](#usage)<br>
-- [Contributing](#contributing)<br>
-- [License](#license)<br>
-
 ## App preview
 <table>
   <tr>
@@ -30,9 +20,19 @@
 <tr></table>
 <br>
 
+## Table of Contents
+- [Introduction](#introduction)<br>
+- [Features](#features)<br>
+- [Technologies](#technologies)<br>
+- [Setup](#setup)<br>
+- [Usage](#usage)<br>
+- [Contributing](#contributing)<br>
+- [License](#license)<br>
+<br>
 
 ## Introduction
 **PokedexDemo** 是基於 **Swift** 語言開發的iOS應用程式。這個專案使用公開的 [PokéAPI](https://pokeapi.co/) 資料庫中所提供的各種詳細的寶可夢設定數據，並將這些數據與圖片以圖鑑方式呈現。主要目的是展示如何通過自定義的 RESTful API 發送網路請求、解析JSON資料結構，並將數據轉化為可互動的 UI 元件，用以展示寶可夢的各項屬性和 Shiny 版本圖片。
+<br>
 
 ## Features
 -**寶可夢列表瀏覽**：<br> 
@@ -46,6 +46,7 @@
 -**Shiny 切換**：<br> 
   在個別展示頁面可以使用 Shiny 按鍵自由切換顯示每隻寶可夢的 Shiny 或一般版本圖片。<br> 
   點擊按鈕切換時增加圖片轉換的動畫效果，增加用戶互動性並保持體驗的流暢度。<br> 
+<br>
 
 ## Technologies
 -**Swift**：使用 Swift 語言進行 iOS 應用開發。<br> 
@@ -59,6 +60,7 @@
 -**Network Layer架構設計**：自定義網路層架構，可針對不同的API請求類型進行調整、擴展，並對數據進行分層管理，符合 SOLID 原則，提高程式碼的可重用性與可測試性。<br> 
 <br> 
 -**SnapKit**：基於 SnapKit 的 UI 佈局的框架，可根據資料自動進行佈局調整，簡化視圖的約束設定。<br> 
+<br>
 
 ## Setup
 **環境需求**
@@ -81,16 +83,18 @@ cd Pokedex
 ```
 使用 Swift Package Manager 安裝依賴項： 在 Xcode 中，選擇 File > Swift Packages > Resolve Package Versions。<br> 
 配置 API 密鑰： 本專案使用公開 API，因此不需要特殊的 API 密鑰配置。直接運行即可。<br> 
+<br>
 
 ## Usage
 在 Xcode 中打開專案檔案，選擇目標模擬器或連結手機。<br> 
 以`⌘ + R`指令開始運行專案，應用程式將在模擬器或設備上啟動。<br> 
 瀏覽寶可夢清單，點擊查看詳細資料，並使用 Shiny 按鈕切換 Shiny 版本圖片。<br> 
+<br>
 
 ## Contributing
-歡迎任何形式的貢獻！如果你想參與開發，可以按照以下步驟：
-
-## Fork 此專案。
+歡迎任何形式的貢獻！如果你想參與開發或給予建議，可以按照以下步驟：
+<br>
+Fork 此專案。
 創建新的分支來開發新功能：
 
 ```bash
