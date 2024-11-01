@@ -24,7 +24,7 @@
 <br> 
 -**API數據整合**：自公開的 [PokéAPI](https://pokeapi.co/)獲取最新寶可夢資料與圖片，並將其資料結構解析轉化為 Domain Model 於應用程式中使用。<br> 
 <br> 
--**RESTFul API數據整合**：使用 URLSession 構建 RESTful 網路層，對 PokéAPI 提供的豐富寶可夢資料進行處理和轉換，實現穩定且可擴展的資料層架構。
+-**RESTFul API數據整合**：使用 URLSession 構建 RESTful 網路層，對 PokéAPI 提供的豐富寶可夢資料進行處理和轉換，實現穩定且可擴展的資料層架構。<br>
 <br>
 -**Network Layer架構設計**：自定義網路層架構，可針對不同的API請求類型進行調整、擴展，並對數據進行分層管理，符合 SOLID 原則，提高程式碼的可重用性與可測試性。<br> 
 <br> 
