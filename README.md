@@ -1,7 +1,25 @@
 # PokeDexDemo App
 
 ## App preview
-![Home page list for different generation](AppPreview/list_of_generation.gif) ![Pagination of pokemon list page](AppPreview/list_page_pagination.gif) ![Pokemon info page](AppPreview/shiny_image_convert.gif)
+<table>
+  <tr>
+ <td style="text-align: center;">
+   <img src="AppPreview/list_of_generation.GIF" alt="Home page list for different generation" width="300"/>
+    <p><strong>圖 1：不同世代的寶可夢列表展示</strong></p>
+  </td>
+<td>
+<td style="text-align: center;">
+    <img src="AppPreview/list_page_pagination.GIF" alt="Pagination of pokemon list page" width="300"/>
+    <p><strong>圖 2：寶可夢列表分頁加載功能</strong></p>
+  </td>
+<td>
+<td style="text-align: center;">
+    <img src="AppPreview/shiny_image_convert.GIF" alt="SPokemon info page" width="300"/>
+    <p><strong>圖 3：一般與shiny版本寶可夢圖片轉換</strong></p>
+  </td>
+<tr></table>
+<br>
+
 
 ## Introduction
 **PokedexDemo** 是基於 **Swift** 語言開發的iOS應用程式。這個專案使用公開的 [PokéAPI](https://pokeapi.co/) 資料庫中所提供的各種詳細的寶可夢設定數據，並將這些數據與圖片以圖鑑方式呈現。主要目的是展示如何通過自定義的 RESTful API 發送網路請求、解析JSON資料結構，並將數據轉化為可互動的 UI 元件，用以展示寶可夢的各項屬性和 Shiny 版本圖片。
