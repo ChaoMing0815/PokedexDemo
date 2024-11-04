@@ -44,8 +44,8 @@
 ```bash
 
 複製程式碼
-git clone https://github.com/yourusername/Pokedex.git
-cd Pokedex
+git clone https://github.com/ChaoMing0815/PokedexDemo.git
+cd PokedexDemo
 
 ```
 使用 Swift Package Manager 安裝依賴項： 在 Xcode 中，選擇 File > Swift Packages > Resolve Package Versions。<br> 
