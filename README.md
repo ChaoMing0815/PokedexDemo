@@ -4,23 +4,17 @@
 <table>
   <tr>
  <td style="text-align: center;">
-   <a href="AppPreview/list_of_generation.GIF">
      <img src="AppPreview/list_of_generation.png" alt="Home page list for different generation" width="300"/>
-   </a>
-    <p><strong>圖 1：不同世代的寶可夢列表展示</strong></p>
+    <p><strong>圖 1：可選不同世代的寶可夢列表</strong></p>
   </td>
 <td>
 <td style="text-align: center;">
-  <a href="AppPreview/list_page_pagination.GIF">
     <img src="AppPreview/list_page_pagination.png" alt="Pagination of pokemon list page" width="300"/>
-  </a>
-    <p><strong>圖 2：寶可夢列表分頁加載功能</strong></p>
+    <p><strong>圖 2：寶可夢列表展示</strong></p>
   </td>
 <td>
 <td style="text-align: center;">
-   <a href="AppPreview/shiny_image_convert.GIF">
-    <img src="AppPreview/shiny_image_convert.png" alt="SPokemon info page" width="300"/>
-   </a>
+    <img src="AppPreview/shiny_image_convert.GIF" alt="SPokemon info page" width="300"/>
     <p><strong>圖 3：一般與shiny版本寶可夢圖片轉換</strong></p>
   </td>
 <tr></table>
