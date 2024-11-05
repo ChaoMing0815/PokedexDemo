@@ -21,7 +21,7 @@
 
 ## High Level UML Diagram
 
-![HLUMLD](AppPreview/PokeDexDemoHLUML.drawio.png)<br>
+![HLUMLD](AppPreview/PokeDexDemoHLUMLD.drawio.png)<br>
 [PokeDexDem High Level UML Diagram](https://drive.google.com/file/d/1S2-nKjdItamuEu0_dznEUa2Jms0Yaf8a/view?usp=sharing)<br>
 
 ## Table of Contents
