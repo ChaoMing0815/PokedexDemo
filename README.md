@@ -14,10 +14,15 @@
   </td>
 <td>
 <td style="text-align: center;">
-    <img src="AppPreview/shiny_image_convert.GIF" alt="SPokemon info page" width="300"/>
-    <p><strong>圖 3：一般與shiny版本寶可夢圖片轉換</strong></p>
+    <img src="AppPreview/shiny_image_convert.png" alt="SPokemon info page" width="300"/>
+    <p><strong>圖 3：可切換顯示shiny版本寶可夢</strong></p>
   </td>
 <tr></table>
+
+## High Level UML Diagram
+
+![HLUMLD](AppPreview/PokeDexDemoHLUML.drawio.png)<br>
+[PokeDexDem High Level UML Diagram](https://drive.google.com/file/d/1S2-nKjdItamuEu0_dznEUa2Jms0Yaf8a/view?usp=sharing)<br>
 
 ## Table of Contents
 - [Introduction](#introduction)<br>
