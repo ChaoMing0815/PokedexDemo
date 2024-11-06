@@ -83,11 +83,11 @@ cd PokedexDemo
 ## Technologies
 - **Swift**：使用 Swift 語言進行 iOS 應用開發。<br><br>
 - **UIKit**：使用 UIKit 框架構建簡單直觀的用戶界面，並自定義各種 Factory Method 創建 UI 元件。<br><br>
-- - **SnapKit**：基於 SnapKit 的 UI 佈局的框架，可根據資料自動進行佈局調整，簡化視圖的約束設定。<br> 
+- **SnapKit**：基於 SnapKit 的 UI 佈局的框架，可根據資料自動進行佈局調整，簡化視圖的約束設定。<br><br>
 - **Clean Architecture**：使用 MVVM 架構確保 View 和 Model 間的解耦，避免 Fat ViewController。並透過分離 DTO 與 DomainModel 增強數據層的穩定性與靈活性。<br><br>
 - **API數據整合**：從公開的 [PokéAPI](https://pokeapi.co/) 獲取最新寶可夢資料與圖片，並將其資料結構解析轉化為 Domain Model 於應用程式中使用。<br><br> 
 - **Network Layer 架構設計**：自定義網路層架構，可針對不同的API請求類型進行調整、擴展，並對數據進行分層管理，符合 SOLID 原則，提高程式碼的可重用性與可測試性。<br><br> 
-- **RESTFul API數據整合**：使用 URLSession 構建 RESTful 網路層，對 PokéAPI 提供的豐富寶可夢資料進行處理和轉換，實現穩定且可擴展的資料層架構。<br><br>
+- **RESTFul API數據整合**：使用 URLSession 構建 RESTful 網路層，對 PokéAPI 提供的豐富寶可夢資料進行處理和轉換，實現穩定且可擴展的資料層架構。<br>
 
 ## Contributing
 歡迎任何形式的貢獻！如果你想參與開發或給予建議，可以按照以下步驟：
