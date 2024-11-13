@@ -63,7 +63,7 @@ cd PokedexDemo
 
 ## Architecture
 
-- PokedexDemo 採用 **MVVM（Model-View-ViewModel** 架構模式進行開發，實現了高度模組化和易維護的代碼結構。<br><br>
+- PokedexDemo 採用 **MVVM（Model-View-ViewModel）** 架構模式進行開發，實現了高度模組化和易維護的代碼結構。<br><br>
 - **Model** 層包含 **DTO（Data Transfer Object）** 和 Domain Model 的分離設計。以 DTO 來專門處理從 API 接收的數據格式，與後端數據保持一致，確保了網路層的穩定性。提高了數據層的靈活性，也使數據能夠在 API 層和應用內部模型間無縫轉換。<br><br>
 - 針對較為複雜的數據業務邏輯建立 **UseCase** 層，分離網路層與 ViewModel 層，讓數據處理和業務邏輯不依賴於具體的數據源。也可避免 ViewModel 層因多種業務邏輯而過於複雜。<br><br>
 
