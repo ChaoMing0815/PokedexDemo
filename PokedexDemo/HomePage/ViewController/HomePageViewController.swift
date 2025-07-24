@@ -16,7 +16,7 @@ class HomePageViewController:UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "PokeDéx"
+        title = "MyShinyDéx"
         
         view.layer.insertSublayer(makeGradientLayer(), at: 0)
         view.addSubview(tableView)

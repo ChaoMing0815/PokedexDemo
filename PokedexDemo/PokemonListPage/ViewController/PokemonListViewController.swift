@@ -20,7 +20,7 @@ class PokemonListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Pokemon List"
+        title = "Pokémon List"
         
         view.layer.insertSublayer(makeGradientLayer(), at: 0)
         view.addSubview(pokemonListCollectionView)
